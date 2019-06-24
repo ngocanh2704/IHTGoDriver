@@ -41,27 +41,27 @@ export default class MainComponent extends Component {
       >
         <Container>
           <Header
-            style={{ backgroundColor: "#e50304", height: 40, paddingTop: 0 }}
+            style={{ backgroundColor: "#e50304"}}
           >
-            <StatusBar hidden={true} />
+            <StatusBar barStyle='light-content' backgroundColor='red' />
             <Left>
               <TouchableOpacity onPress={() => this.openDrawer()}>
                 <Icon
                   type="MaterialIcons"
                   name="menu"
-                  style={{ color: "white", fontSize: 30 }}
+                  style={{ color: "white", fontSize: 40 }}
                 />
               </TouchableOpacity>
             </Left>
             <Body>
-              <Text style={{ color: "white", fontSize: 15 }}>IHT-Đơn Hàng</Text>
+              <Text style={{ color: "white", fontSize: 17 }}>IHT-Đơn Hàng</Text>
             </Body>
             <Right>
               <TouchableOpacity>
                 <Icon
                   type="Ionicons"
                   name="ios-contact"
-                  style={{ color: "white", fontSize: 30 }}
+                  style={{ color: "white", fontSize: 40 }}
                 />
               </TouchableOpacity>
             </Right>

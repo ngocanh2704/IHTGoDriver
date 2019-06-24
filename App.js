@@ -1,5 +1,4 @@
 import {
-  createDrawerNavigator,
   createAppContainer,
   createStackNavigator
 } from "react-navigation";
@@ -14,14 +13,14 @@ const AppNavigator = createStackNavigator({
   LoginScreen: {
     screen: LoginComponent,
     navigationOptions: {
-      header: null
+      header: null,
+      gesturesEnabled: false
     }
   },
   MainScreen: {
     screen: MainComponent,
     navigationOptions: {
-      header: null,
-      gesturesEnabled: false
+      header: null,      
     }
   },
   AllOrderScreen: {

@@ -22,7 +22,7 @@ export default class DetailComponent extends Component {
     return (
       <Container>
         <Header
-          style={{ backgroundColor: "#e50304", height: 40, paddingTop: 0 }}
+          style={{ backgroundColor: "#e50304"}}
         >
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -30,7 +30,7 @@ export default class DetailComponent extends Component {
             </Button>
           </Left>
           <Body>
-            <Text style={{ color: "white", fontSize: 15 }}>
+            <Text style={{ color: "white", fontSize: 17 }}>
               Chi tiết đơn hàng
             </Text>
           </Body>
