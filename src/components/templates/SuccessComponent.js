@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { List, Container, Content } from "native-base";
 import ItemComponent from "../atoms/ItemComponent";
 
-export default class SuccessComponent extends Component {
+export default class SuccessComponent extends PureComponent {
   handle = () => {
     this.props.handleDetail();
   };
@@ -25,4 +25,3 @@ export default class SuccessComponent extends Component {
     );
   }
 }
-    

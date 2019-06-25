@@ -1,5 +1,11 @@
-import React, { Component } from "react";
-import { Text, View, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import React, { PureComponent } from "react";
+import {
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet
+} from "react-native";
 import { Row, Col, Icon } from "native-base";
 
 const responsiveFontSize = f => {
@@ -7,7 +13,7 @@ const responsiveFontSize = f => {
 };
 const { height, width } = Dimensions.get("window");
 
-export default class DrawerComponent extends Component {
+export default class DrawerComponent extends PureComponent {
   render() {
     return (
       <View style={styles.container}>

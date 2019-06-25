@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Container,
   Header,
@@ -17,13 +17,11 @@ import {
 } from "native-base";
 import ItemDetailComponent from "../templates/ItemDetailComponent";
 
-export default class DetailComponent extends Component {
+export default class DetailComponent extends PureComponent {
   render() {
     return (
       <Container>
-        <Header
-          style={{ backgroundColor: "#e50304"}}
-        >
+        <Header style={{ backgroundColor: "#e50304" }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />

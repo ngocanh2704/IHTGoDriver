@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Container,
   Header,
@@ -20,7 +20,7 @@ import SuccessComponent from "../templates/SuccessComponent";
 import SideBar from "../templates/DrawerComponent";
 import { Drawer } from "native-base";
 
-export default class MainComponent extends Component {
+export default class MainComponent extends PureComponent {
   handleDetail = () => {
     this.props.navigation.navigate("OrderDetailScreen");
   };
@@ -40,10 +40,8 @@ export default class MainComponent extends Component {
         onClose={() => this.closeDrawer()}
       >
         <Container>
-          <Header
-            style={{ backgroundColor: "#e50304"}}
-          >
-            <StatusBar barStyle='light-content' backgroundColor='red' />
+          <Header style={{ backgroundColor: "#e50304" }}>
+            <StatusBar barStyle="light-content" backgroundColor="red" />
             <Left>
               <TouchableOpacity onPress={() => this.openDrawer()}>
                 <Icon

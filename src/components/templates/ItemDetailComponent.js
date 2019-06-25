@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet, Dimensions } from "react-native";
 import {
   Card,
@@ -18,7 +18,7 @@ const responsiveFontSize = f => {
   return Math.sqrt(height * height + width * width) * (f / 100);
 };
 const { height, width } = Dimensions.get("window");
-export default class ItemDetailComponent extends Component {
+export default class ItemDetailComponent extends PureComponent {
   render() {
     return (
       <Container style={{ backgroundColor: "#fff" }}>

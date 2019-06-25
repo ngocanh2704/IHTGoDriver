@@ -1,14 +1,17 @@
-import {
-  createAppContainer,
-  createStackNavigator
-} from "react-navigation";
+import React from "react";
+import { createAppContainer, createStackNavigator } from "react-navigation";
 import AllOrderComponent from "./src/components/templates/AllOrderComponent";
 import PendingComponent from "./src/components/templates/PendingComponent";
 import SuccessComponent from "./src/components/templates/SuccessComponent";
-import LoginComponent from "./src/components/pages/LoginComponent";
+import LoginComponent from "./src/components/pages/login";
 import MainComponent from "./src/components/pages/MainComponent";
 import DetailComponent from "./src/components/pages/DetailComponent";
 
+import rootReducer from "./src/reducers";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+const store = createStore(rootReducer);
 const AppNavigator = createStackNavigator({
   LoginScreen: {
     screen: LoginComponent,
@@ -20,7 +23,7 @@ const AppNavigator = createStackNavigator({
   MainScreen: {
     screen: MainComponent,
     navigationOptions: {
-      header: null,      
+      header: null
     }
   },
   AllOrderScreen: {
@@ -49,4 +52,14 @@ const AppNavigator = createStackNavigator({
   }
 });
 
-export default createAppContainer(AppNavigator);
+let Navigation = createAppContainer(AppNavigator);
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    );
+  }
+}
