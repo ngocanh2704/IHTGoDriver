@@ -1,27 +1,24 @@
-import React, { PureComponent } from "react";
-import { List, Container, Content } from "native-base";
-import ItemComponent from "../atoms/ItemComponent";
+import React from "react";
+import { List, Content } from "native-base";
+import { OrderItem } from "../organisms";
+import styled from "styled-components";
+import { TouchableOpacity } from "react-native";
 
-export default class AllOrderComponent extends PureComponent {
-  handle = () => {
-    this.props.handleDetail();
-  };
-  render() {
-    return (
-      <Content>
-        <List>
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-        </List>
-      </Content>
-    );
-  }
-}
+const Container = styled(Content)`
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
+export default props => (
+  <Container>
+    <List>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigate(1);
+        }}
+      >
+        <OrderItem />
+      </TouchableOpacity>
+    </List>
+  </Container>
+);

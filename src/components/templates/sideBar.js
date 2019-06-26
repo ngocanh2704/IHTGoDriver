@@ -54,10 +54,19 @@ export default class DrawerComponent extends PureComponent {
             </Col>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.menu_item}>
+            <Col size={1} style={privateStyle.center}>
+              <DarkIcon type="AntDesign" name="copyright" />
+            </Col>
+            <Col size={5}>
+              <Text>Thông tin ứng dụng</Text>
+            </Col>
+          </TouchableOpacity>
+
           <View style={privateStyle.border} />
           <TouchableOpacity style={styles.menu_item}>
             <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="export2" />
+              <DarkIcon type="AntDesign" name="logout" />
             </Col>
             <Col size={5}>
               <Text>Đăng xuất hệ thống</Text>
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     flex: 3 / 10,
-    backgroundColor: "#e50304"
+    backgroundColor: "#800000"
   },
   header_id: {
     paddingTop: 5,
@@ -116,18 +125,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderTopColor: "#4A4948"
   },
-  version: {
-    color: "#73716D",
-    fontSize: 12,
-    marginBottom: 5
-  },
   pointText: {
     color: "#E0E0E0",
     fontSize: responsiveFontSize(2),
     marginBottom: 5
-  },
-  copyright: {
-    color: "#73716D",
-    fontSize: 12
   }
 });

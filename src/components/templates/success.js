@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { List, Container, Content } from "native-base";
-import ItemComponent from "../atoms/ItemComponent";
+import { OrderItem } from "../organisms";
 
 export default class SuccessComponent extends PureComponent {
   handle = () => {
@@ -10,16 +10,7 @@ export default class SuccessComponent extends PureComponent {
     return (
       <Content>
         <List>
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
-          <ItemComponent handle={this.handle} />
+          <OrderItem handle={this.handle} />
         </List>
       </Content>
     );

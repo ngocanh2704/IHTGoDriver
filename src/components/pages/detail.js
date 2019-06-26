@@ -2,62 +2,56 @@ import React, { PureComponent } from "react";
 import {
   Container,
   Header,
-  Content,
-  Card,
-  CardItem,
-  Text,
   Body,
   Left,
   Right,
   Button,
-  Icon,
   Tabs,
-  TabHeading,
   Tab
 } from "native-base";
-import ItemDetailComponent from "../templates/itemDetail";
+import { ItemDetail, OrderMap } from "../templates";
+import { TextTitle as Text, DarkIcon as Icon, TabHeading } from "../atoms";
 
 export default class DetailComponent extends PureComponent {
   render() {
     return (
       <Container>
-        <Header style={{ backgroundColor: "#e50304" }}>
+        <Header style={{ backgroundColor: "white" }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />
             </Button>
           </Left>
           <Body>
-            <Text style={{ color: "white", fontSize: 17 }}>
+            <Text style={{ color: "#e50304", fontSize: 17 }}>
               Chi tiết đơn hàng
             </Text>
           </Body>
           <Right />
         </Header>
-        <Tabs
-          locked={true}
-          tabBarUnderlineStyle={{ backgroundColor: "#e50304" }}
-        >
+        <Tabs locked={true} tabBarUnderlineStyle={{ backgroundColor: "white" }}>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "white" }}>
-                <Text style={{ color: "black" }}>Thông Tin</Text>
+              <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <Text>THÔNG TIN</Text>
               </TabHeading>
             }
           >
-            <ItemDetailComponent />
+            <ItemDetail />
           </Tab>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "white" }}>
-                <Text style={{ color: "black" }}>Bản Đồ</Text>
+              <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <Text>BẢN ĐỒ</Text>
               </TabHeading>
             }
-          />
+          >
+            <OrderMap />
+          </Tab>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "white" }}>
-                <Text style={{ color: "black" }}>Chat</Text>
+              <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <Text>CHAT</Text>
               </TabHeading>
             }
           />

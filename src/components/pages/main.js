@@ -1,25 +1,23 @@
 import React, { PureComponent } from "react";
-import { Container, Header, Tab, Tabs, Left, Right } from "native-base";
-import { StatusBar, TouchableOpacity, View } from "react-native";
+import { Container, Tab, Tabs } from "native-base";
 import { AllOrder, Pending, Success, SideBar } from "../templates";
 import { Drawer } from "native-base";
-import { TextTitle as Text, DarkIcon as Icon, TabHeading } from "../atoms";
-import styled from "styled-components";
-
-const Divider = styled(TouchableOpacity)`
-  margin-right: 20px;
-`;
+import { TextTitle as Text, TabHeading } from "../atoms";
+import { MainHeader as Header } from "../organisms";
 
 export default class MainComponent extends PureComponent {
-  handleDetail = () => {
-    this.props.navigation.navigate("OrderDetailScreen");
-  };
   closeDrawer = () => {
     this.drawer._root.close();
   };
+
   openDrawer = () => {
     this.drawer._root.open();
   };
+
+  navigateToDetail = id => {
+    this.props.navigation.navigate("OrderDetailScreen");
+  };
+
   render() {
     return (
       <Drawer
@@ -30,22 +28,7 @@ export default class MainComponent extends PureComponent {
         onClose={this.closeDrawer}
       >
         <Container>
-          <Header style={{ backgroundColor: "white" }}>
-            <StatusBar barStyle="light-content" backgroundColor="red" />
-            <Left>
-              <TouchableOpacity onPress={this.openDrawer}>
-                <Icon type="AntDesign" name="setting" />
-              </TouchableOpacity>
-            </Left>
-            <Right>
-              <Divider>
-                <Icon type="AntDesign" name="form" />
-              </Divider>
-              <Divider>
-                <Icon type="AntDesign" name="customerservice" />
-              </Divider>
-            </Right>
-          </Header>
+          <Header openDrawer={this.openDrawer} />
           <Tabs
             locked={true}
             tabBarUnderlineStyle={{ backgroundColor: "white" }}
@@ -57,7 +40,7 @@ export default class MainComponent extends PureComponent {
                 </TabHeading>
               }
             >
-              <AllOrder handleDetail={this.handleDetail} />
+              <AllOrder navigate={this.navigateToDetail} />
             </Tab>
             <Tab
               heading={
@@ -66,7 +49,7 @@ export default class MainComponent extends PureComponent {
                 </TabHeading>
               }
             >
-              <Pending handleDetail={this.handleDetail} />
+              <Pending />
             </Tab>
             <Tab
               heading={
@@ -75,7 +58,7 @@ export default class MainComponent extends PureComponent {
                 </TabHeading>
               }
             >
-              <Success handleDetail={this.handleDetail} />
+              <Success />
             </Tab>
           </Tabs>
         </Container>
