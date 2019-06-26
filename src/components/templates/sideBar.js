@@ -1,12 +1,7 @@
 import React, { PureComponent } from "react";
-import {
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
-import { Row, Col, Icon } from "native-base";
+import { View, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import { Row, Col } from "native-base";
+import { DarkIcon, Icon, TextMenu as Text } from "../atoms";
 
 const responsiveFontSize = f => {
   return Math.sqrt(height * height + width * width) * (f / 100);
@@ -22,7 +17,7 @@ export default class DrawerComponent extends PureComponent {
             <Col style={privateStyle.center}>
               <Icon
                 name="ios-contacts"
-                style={{ fontSize: responsiveFontSize(10), color: "#fff" }}
+                style={{ fontSize: responsiveFontSize(10) }}
               />
               <Text style={styles.header_id}>name</Text>
               <Text style={styles.pointText}>Phone</Text>
@@ -34,62 +29,38 @@ export default class DrawerComponent extends PureComponent {
         <View style={styles.menu}>
           <TouchableOpacity style={styles.menu_item}>
             <Col size={1} style={privateStyle.center}>
-              <Icon
-                name="ios-information-circle-outline"
-                style={{ fontSize: 30, color: "#03A9F4" }}
-              />
+              <DarkIcon type="AntDesign" name="exclamationcircleo" />
             </Col>
             <Col size={5}>
-              <Text style={styles.menu_text}>Thông tin chung</Text>
+              <Text>Thông tin chung</Text>
             </Col>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menu_item}>
             <Col size={1} style={privateStyle.center}>
-              <Icon
-                name="ios-list-box-outline"
-                style={{ fontSize: 30, color: "#FF9800" }}
-              />
+              <DarkIcon type="AntDesign" name="setting" />
             </Col>
             <Col size={5}>
-              <Text style={styles.menu_text}>Tạo đơn hàng mới</Text>
+              <Text>Cập nhật profile</Text>
             </Col>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menu_item}>
             <Col size={1} style={privateStyle.center}>
-              <Icon
-                name="ios-contact-outline"
-                style={{ fontSize: 30, color: "#7CB342" }}
-              />
+              <DarkIcon type="AntDesign" name="Safety" />
             </Col>
             <Col size={5}>
-              <Text style={styles.menu_text}>Cập nhật profile</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menu_item}>
-            <Col size={1} style={privateStyle.center}>
-              <Icon
-                name="ios-sync-outline"
-                style={{ fontSize: 30, color: "#D500F9" }}
-              />
-            </Col>
-            <Col size={5}>
-              <Text style={styles.menu_text}>Thay đổi mật khẩu</Text>
+              <Text>Thay đổi mật khẩu</Text>
             </Col>
           </TouchableOpacity>
 
           <View style={privateStyle.border} />
           <TouchableOpacity style={styles.menu_item}>
             <Col size={1} style={privateStyle.center}>
-              <Icon
-                name="md-power"
-                style={{ fontSize: 30, color: "#FF5722" }}
-              />
+              <DarkIcon type="AntDesign" name="export2" />
             </Col>
             <Col size={5}>
-              <Text style={styles.menu_text}>Đăng xuất hệ thống</Text>
+              <Text>Đăng xuất hệ thống</Text>
             </Col>
           </TouchableOpacity>
         </View>
@@ -126,7 +97,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 7 / 10,
-    padding: 5,
+    padding: 10,
     backgroundColor: "#fff"
   },
   menu_item: {

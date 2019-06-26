@@ -1,35 +1,25 @@
 import React, { PureComponent } from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Tab,
-  Tabs,
-  Left,
-  Body,
-  Right,
-  Text,
-  TabHeading,
-  Icon,
-  Button
-} from "native-base";
-import { StatusBar, TouchableOpacity } from "react-native";
-import AllOrderComponent from "../templates/allOrder";
-import PendingComponent from "../templates/pending";
-import SuccessComponent from "../templates/success";
-import SideBar from "../templates/drawer";
+import { Container, Header, Tab, Tabs, Left, Right } from "native-base";
+import { StatusBar, TouchableOpacity, View } from "react-native";
+import { AllOrder, Pending, Success, SideBar } from "../templates";
 import { Drawer } from "native-base";
+import { TextTitle as Text, DarkIcon as Icon, TabHeading } from "../atoms";
+import styled from "styled-components";
+
+const Divider = styled(TouchableOpacity)`
+  margin-right: 20px;
+`;
 
 export default class MainComponent extends PureComponent {
   handleDetail = () => {
     this.props.navigation.navigate("OrderDetailScreen");
   };
-  closeDrawer() {
+  closeDrawer = () => {
     this.drawer._root.close();
-  }
-  openDrawer() {
+  };
+  openDrawer = () => {
     this.drawer._root.open();
-  }
+  };
   render() {
     return (
       <Drawer
@@ -37,63 +27,55 @@ export default class MainComponent extends PureComponent {
           this.drawer = ref;
         }}
         content={<SideBar navigator={this.navigator} />}
-        onClose={() => this.closeDrawer()}
+        onClose={this.closeDrawer}
       >
         <Container>
-          <Header style={{ backgroundColor: "#e50304" }}>
+          <Header style={{ backgroundColor: "white" }}>
             <StatusBar barStyle="light-content" backgroundColor="red" />
             <Left>
-              <TouchableOpacity onPress={() => this.openDrawer()}>
-                <Icon
-                  type="MaterialIcons"
-                  name="menu"
-                  style={{ color: "white", fontSize: 40 }}
-                />
+              <TouchableOpacity onPress={this.openDrawer}>
+                <Icon type="AntDesign" name="setting" />
               </TouchableOpacity>
             </Left>
-            <Body>
-              <Text style={{ color: "white", fontSize: 17 }}>IHT-Đơn Hàng</Text>
-            </Body>
             <Right>
-              <TouchableOpacity>
-                <Icon
-                  type="Ionicons"
-                  name="ios-contact"
-                  style={{ color: "white", fontSize: 40 }}
-                />
-              </TouchableOpacity>
+              <Divider>
+                <Icon type="AntDesign" name="form" />
+              </Divider>
+              <Divider>
+                <Icon type="AntDesign" name="customerservice" />
+              </Divider>
             </Right>
           </Header>
           <Tabs
             locked={true}
-            tabBarUnderlineStyle={{ backgroundColor: "#e50304" }}
+            tabBarUnderlineStyle={{ backgroundColor: "white" }}
           >
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Tất Cả</Text>
+                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                  <Text>TẤT CẢ</Text>
                 </TabHeading>
               }
             >
-              <AllOrderComponent handleDetail={this.handleDetail} />
+              <AllOrder handleDetail={this.handleDetail} />
             </Tab>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Đang Giao</Text>
+                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                  <Text>ĐANG GIAO</Text>
                 </TabHeading>
               }
             >
-              <PendingComponent handleDetail={this.handleDetail} />
+              <Pending handleDetail={this.handleDetail} />
             </Tab>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Hoàn Thành</Text>
+                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                  <Text>HOÀN THÀNH</Text>
                 </TabHeading>
               }
             >
-              <SuccessComponent handleDetail={this.handleDetail} />
+              <Success handleDetail={this.handleDetail} />
             </Tab>
           </Tabs>
         </Container>

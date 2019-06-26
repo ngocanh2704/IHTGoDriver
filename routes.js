@@ -3,13 +3,13 @@ import { AllOrder, Pending, Success } from "./src/components/templates";
 import { Main, Login, Detail } from "./src/components/pages";
 
 const Screens = createStackNavigator({
-  LoginScreen: {
-    screen: Login,
-    navigationOptions: {
-      header: null,
-      gesturesEnabled: false
-    }
-  },
+  // LoginScreen: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //     header: null,
+  //     gesturesEnabled: false
+  //   }
+  // },
   MainScreen: {
     screen: Main,
     navigationOptions: {

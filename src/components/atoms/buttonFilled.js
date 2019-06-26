@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Button } from "native-base";
 import React from "react";
-import Text from "./textInside";
+import Text from "./texts/textInside";
 
 const ButtonFilled = styled(Button)`
   margin-top: 20;
@@ -11,7 +11,6 @@ const ButtonFilled = styled(Button)`
   border: none;
   border-radius: 5;
   background-color: ${props => props.theme.mainColor};
-  box-shadow: none;
 `;
 
 export default props => (

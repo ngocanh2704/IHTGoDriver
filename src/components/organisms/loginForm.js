@@ -5,7 +5,7 @@ import {
   Quote,
   InputNormal as Input,
   ButtonFilled as Button,
-  Icon
+  DarkIcon as Icon
 } from "../atoms";
 
 const Form = styled(View)`
