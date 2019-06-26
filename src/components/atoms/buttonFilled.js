@@ -3,20 +3,19 @@ import { Button } from "native-base";
 import React from "react";
 import Text from "./textInside";
 
-const ButtonRounded = styled(Button)`
+const ButtonFilled = styled(Button)`
   margin-top: 20;
   width: 80%;
-  height: 12%;
   margin-left: auto;
   margin-right: auto;
-  border: 2px solid ${props => props.theme.mainColor};
+  border: none;
   border-radius: 5;
-  background-color: transparent;
+  background-color: ${props => props.theme.mainColor};
   box-shadow: none;
 `;
 
 export default props => (
-  <ButtonRounded onPress={props.onPress}>
+  <ButtonFilled onPress={props.onPress}>
     <Text>Đăng nhập</Text>
-  </ButtonRounded>
+  </ButtonFilled>
 );

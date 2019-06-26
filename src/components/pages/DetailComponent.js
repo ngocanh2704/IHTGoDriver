@@ -15,7 +15,7 @@ import {
   TabHeading,
   Tab
 } from "native-base";
-import ItemDetailComponent from "../templates/ItemDetailComponent";
+import ItemDetailComponent from "../templates/itemDetail";
 
 export default class DetailComponent extends PureComponent {
   render() {

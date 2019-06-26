@@ -1,19 +1,22 @@
-import { SET_USERNAME } from "./../actions/types";
+import { SET_USERNAME, SET_PASSWORD } from "./../actions/types";
 
 const initialState = {
-  title: 1
+  username: "",
+  password: ""
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_USERNAME:
-      console.log(state);
-      console.log("reducer" + action.value);
-      const newState = {
+      return {
         ...state,
-        title: 12345
+        username: action.username
       };
-      return newState;
+    case SET_PASSWORD:
+      return {
+        ...state,
+        password: action.password
+      };
     default:
       return state;
   }

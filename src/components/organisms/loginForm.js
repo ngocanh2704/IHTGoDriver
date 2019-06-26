@@ -1,7 +1,12 @@
 import React from "react";
-import Input from "../atoms/inputNormal";
-import { View, Item, Icon } from "native-base";
+import { View, Item } from "native-base";
 import styled from "styled-components";
+import {
+  Quote,
+  InputNormal as Input,
+  ButtonFilled as Button,
+  Icon
+} from "../atoms";
 
 const Form = styled(View)`
   margin-top: 20px;
@@ -10,24 +15,26 @@ const Form = styled(View)`
 export default props => (
   <Form>
     <Item>
-      <Icon
-        type="AntDesign"
-        name="user"
-        style={{
-          color: "#e50304"
-        }}
+      <Icon type="AntDesign" name="user" />
+      <Input
+        placeholder="username"
+        value={props.username}
+        onChangeText={props.setUsername}
       />
-      <Input placeholder="User name" />
     </Item>
     <Item>
-      <Icon
-        type="AntDesign"
-        name="lock"
-        style={{
-          color: "#e50304"
-        }}
+      <Icon type="AntDesign" name="lock" />
+      <Input
+        placeholder="password"
+        value={props.password}
+        onChange={props.setPassword}
       />
-      <Input placeholder="Password" />
     </Item>
+    <Form>
+      <Quote>Quên mật khẩu?</Quote>
+    </Form>
+    <View>
+      <Button onPress={props.login} />
+    </View>
   </Form>
 );

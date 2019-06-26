@@ -14,10 +14,10 @@ import {
   Button
 } from "native-base";
 import { StatusBar, TouchableOpacity } from "react-native";
-import AllOrderComponent from "../templates/AllOrderComponent";
-import PendingComponent from "../templates/PendingComponent";
-import SuccessComponent from "../templates/SuccessComponent";
-import SideBar from "../templates/DrawerComponent";
+import AllOrderComponent from "../templates/allOrder";
+import PendingComponent from "../templates/pending";
+import SuccessComponent from "../templates/success";
+import SideBar from "../templates/drawer";
 import { Drawer } from "native-base";
 
 export default class MainComponent extends PureComponent {

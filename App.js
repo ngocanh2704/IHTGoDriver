@@ -1,65 +1,25 @@
 import React from "react";
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import AllOrderComponent from "./src/components/templates/AllOrderComponent";
-import PendingComponent from "./src/components/templates/PendingComponent";
-import SuccessComponent from "./src/components/templates/SuccessComponent";
-import LoginComponent from "./src/components/pages/login";
-import MainComponent from "./src/components/pages/MainComponent";
-import DetailComponent from "./src/components/pages/DetailComponent";
-
+import { StatusBar } from "react-native";
 import rootReducer from "./src/reducers";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import theme from "./theme";
+import Navigation from "./routes";
 
 const store = createStore(rootReducer);
-const AppNavigator = createStackNavigator({
-  LoginScreen: {
-    screen: LoginComponent,
-    navigationOptions: {
-      header: null,
-      gesturesEnabled: false
-    }
-  },
-  MainScreen: {
-    screen: MainComponent,
-    navigationOptions: {
-      header: null
-    }
-  },
-  AllOrderScreen: {
-    screen: AllOrderComponent,
-    navigationOptions: {
-      header: null
-    }
-  },
-  PendingScreen: {
-    screen: PendingComponent,
-    navigationOptions: {
-      header: null
-    }
-  },
-  SuccessScreen: {
-    screen: SuccessComponent,
-    navigationOptions: {
-      header: null
-    }
-  },
-  OrderDetailScreen: {
-    screen: DetailComponent,
-    navigationOptions: {
-      header: null
-    }
-  }
-});
-
-let Navigation = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
+      <>
+        <StatusBar hidden={true} />
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <Navigation />
+          </ThemeProvider>
+        </Provider>
+      </>
     );
   }
 }
