@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Fab } from "native-base";
+import { Button, Fab, View } from "native-base";
 import { Icon } from "../atoms";
 import styled from "styled-components";
 
