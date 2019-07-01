@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { Container, Tab, Tabs } from "native-base";
 import { AllOrder, Pending, Success, SideBar } from "../templates";
 import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
 import { MainHeader as Header } from "../organisms";
 
-export default class MainComponent extends PureComponent {
+export default class Main extends Component {
   closeDrawer = () => {
     this.drawer._root.close();
   };
@@ -24,7 +24,7 @@ export default class MainComponent extends PureComponent {
         ref={ref => {
           this.drawer = ref;
         }}
-        content={<SideBar navigator={this.navigator} />}
+        content={<SideBar navigator={this.props.navigation} />}
         onClose={this.closeDrawer}
       >
         <Container>
@@ -35,7 +35,7 @@ export default class MainComponent extends PureComponent {
           >
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <TabHeading style={{ backgroundColor: "#c62828" }}>
                   <Text>TẤT CẢ</Text>
                 </TabHeading>
               }
@@ -44,7 +44,7 @@ export default class MainComponent extends PureComponent {
             </Tab>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <TabHeading style={{ backgroundColor: "#c62828" }}>
                   <Text>ĐANG GIAO</Text>
                 </TabHeading>
               }
@@ -53,7 +53,7 @@ export default class MainComponent extends PureComponent {
             </Tab>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "#E40202" }}>
+                <TabHeading style={{ backgroundColor: "#c62828" }}>
                   <Text>HOÀN THÀNH</Text>
                 </TabHeading>
               }

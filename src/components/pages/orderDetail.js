@@ -1,38 +1,21 @@
 import React, { PureComponent } from "react";
-import {
-  Container,
-  Header,
-  Body,
-  Left,
-  Right,
-  Button,
-  Tabs,
-  Tab
-} from "native-base";
+import { Container, Tabs, Tab, TabHeading } from "native-base";
 import { ItemDetail, OrderMap } from "../templates";
-import { TextTitle as Text, DarkIcon as Icon, TabHeading } from "../atoms";
+import { TextTitle as Text } from "../atoms";
+import { MenuHeader as Header, Fab } from "../organisms";
 
 export default class DetailComponent extends PureComponent {
   render() {
     return (
       <Container>
-        <Header style={{ backgroundColor: "white" }}>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Text style={{ color: "#e50304", fontSize: 17 }}>
-              Chi tiết đơn hàng
-            </Text>
-          </Body>
-          <Right />
-        </Header>
+        <Header
+          back={() => this.props.navigation.goBack()}
+          title="Thông tin đơn hàng"
+        />
         <Tabs locked={true} tabBarUnderlineStyle={{ backgroundColor: "white" }}>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "#E40202" }}>
+              <TabHeading style={{ backgroundColor: "#c62828" }}>
                 <Text>THÔNG TIN</Text>
               </TabHeading>
             }
@@ -41,7 +24,7 @@ export default class DetailComponent extends PureComponent {
           </Tab>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "#E40202" }}>
+              <TabHeading style={{ backgroundColor: "#c62828" }}>
                 <Text>BẢN ĐỒ</Text>
               </TabHeading>
             }
@@ -50,12 +33,13 @@ export default class DetailComponent extends PureComponent {
           </Tab>
           <Tab
             heading={
-              <TabHeading style={{ backgroundColor: "#E40202" }}>
+              <TabHeading style={{ backgroundColor: "#c62828" }}>
                 <Text>CHAT</Text>
               </TabHeading>
             }
           />
         </Tabs>
+        <Fab />
       </Container>
     );
   }

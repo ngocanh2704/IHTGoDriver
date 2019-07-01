@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
-import { View } from "react-native";
-import { Content, Body, Card, CardItem, Fab } from "native-base";
+import { Content, Body, Card, CardItem } from "native-base";
 import { TextNormal as Text, TextOrder, DarkIcon as Icon } from "../atoms";
 
 export default class ItemDetail extends PureComponent {
@@ -61,17 +60,6 @@ export default class ItemDetail extends PureComponent {
               <TextOrder>Điểm giao hàng thêm</TextOrder>
             </CardItem>
           </Card>
-          <View style={{ flex: 1 }}>
-            <Fab
-              active={false}
-              direction="up"
-              containerStyle={{}}
-              style={{ backgroundColor: "red" }}
-              position="bottomRight"
-            >
-              <Icon type="AntDesign" name="phone" />
-            </Fab>
-          </View>
         </Content>
       </>
     );

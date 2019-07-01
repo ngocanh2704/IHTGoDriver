@@ -6,6 +6,6 @@ const InputNormal = styled(Input)`
   margin-left: auto;
   margin-right: auto;
   color: ${props => props.theme.darkColor};
-  font-size: 14;
+  font-size: 16;
 `;
 export default InputNormal;

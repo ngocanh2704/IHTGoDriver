@@ -5,7 +5,7 @@ import Text from "./texts/textInside";
 
 const ButtonFilled = styled(Button)`
   margin-top: 20;
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   border: none;
@@ -15,6 +15,6 @@ const ButtonFilled = styled(Button)`
 
 export default props => (
   <ButtonFilled onPress={props.onPress}>
-    <Text>Đăng nhập</Text>
+    <Text>{props.text}</Text>
   </ButtonFilled>
 );

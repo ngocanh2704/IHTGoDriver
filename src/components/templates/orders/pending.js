@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { List, Container, Content } from "native-base";
-import { OrderItem } from "../organisms";
+import { List, Content } from "native-base";
+import { OrderItem } from "../../organisms";
 
-export default class SuccessComponent extends PureComponent {
+export default class OrderPending extends PureComponent {
   handle = () => {
     this.props.handleDetail();
   };

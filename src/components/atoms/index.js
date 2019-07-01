@@ -14,3 +14,4 @@ export { default as TextBadgePending } from "./texts/textBadgePending";
 export { default as TextBadgeProcessing } from "./texts/textBadgeProcessing";
 export { default as TextOrderID } from "./texts/textOrderID";
 export { default as DarkOrderIcon } from "./icons/darkOrderIcon";
+export { default as CheckBox } from "./checkBox";

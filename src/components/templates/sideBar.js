@@ -27,34 +27,10 @@ export default class DrawerComponent extends PureComponent {
         </View>
 
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.menu_item}>
-            <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="exclamationcircleo" />
-            </Col>
-            <Col size={5}>
-              <Text>Thông tin chung</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menu_item}>
-            <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="setting" />
-            </Col>
-            <Col size={5}>
-              <Text>Cập nhật profile</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menu_item}>
-            <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="Safety" />
-            </Col>
-            <Col size={5}>
-              <Text>Thay đổi mật khẩu</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menu_item}>
+          <TouchableOpacity
+            style={styles.menu_item}
+            onPress={() => this.props.navigator.navigate("AppInfoScreen")}
+          >
             <Col size={1} style={privateStyle.center}>
               <DarkIcon type="AntDesign" name="copyright" />
             </Col>
@@ -63,10 +39,39 @@ export default class DrawerComponent extends PureComponent {
             </Col>
           </TouchableOpacity>
 
-          <View style={privateStyle.border} />
-          <TouchableOpacity style={styles.menu_item}>
+          <TouchableOpacity
+            style={styles.menu_item}
+            onPress={() => this.props.navigator.navigate("ProfileScreen")}
+          >
             <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="logout" />
+              <DarkIcon type="AntDesign" name="setting" />
+            </Col>
+            <Col size={5}>
+              <Text>Cập nhật profile</Text>
+            </Col>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.menu_item}
+            onPress={() =>
+              this.props.navigator.navigate("ChangePasswordScreen")
+            }
+          >
+            <Col size={1} style={privateStyle.center}>
+              <DarkIcon type="AntDesign" name="Safety" />
+            </Col>
+            <Col size={5}>
+              <Text>Thay đổi mật khẩu</Text>
+            </Col>
+          </TouchableOpacity>
+
+          <View style={privateStyle.border} />
+          <TouchableOpacity
+            style={styles.menu_item}
+            onPress={() => this.props.navigator.navigate("LoginScreen")}
+          >
+            <Col size={1} style={privateStyle.center}>
+              <DarkIcon type="AntDesign" name="poweroff" />
             </Col>
             <Col size={5}>
               <Text>Đăng xuất hệ thống</Text>
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     flex: 3 / 10,
-    backgroundColor: "#800000"
+    backgroundColor: "#c62828"
   },
   header_id: {
     paddingTop: 5,

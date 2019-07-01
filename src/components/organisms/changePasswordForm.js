@@ -2,22 +2,21 @@ import React from "react";
 import { View, Item } from "native-base";
 import styled from "styled-components";
 import {
-  Quote,
   InputNormal as Input,
   ButtonFilled as Button,
   DarkIcon as Icon
 } from "../atoms";
 
 const Form = styled(View)`
-  margin-top: 20px;
+  margin: 20px;
 `;
 
 export default props => (
   <Form>
     <Item>
-      <Icon type="AntDesign" name="user" />
+      <Icon type="AntDesign" name="unlock" />
       <Input
-        placeholder="username"
+        placeholder="mật khẩu cũ"
         value={props.username}
         onChangeText={props.setUsername}
       />
@@ -25,16 +24,19 @@ export default props => (
     <Item>
       <Icon type="AntDesign" name="lock" />
       <Input
-        placeholder="password"
+        placeholder="mật khẩu mới"
         value={props.password}
         onChange={props.setPassword}
       />
     </Item>
-    <Form>
-      <Quote>Quên mật khẩu?</Quote>
-    </Form>
-    <View>
-      <Button onPress={props.login} text="Đăng nhập" />
-    </View>
+    <Item>
+      <Icon type="AntDesign" name="lock" />
+      <Input
+        placeholder="nhập lại mật khẩu mới"
+        value={props.password}
+        onChange={props.setPassword}
+      />
+    </Item>
+    <Button onPress={props.login} text="Đổi mật khẩu" />
   </Form>
 );

@@ -16,6 +16,6 @@ const ButtonRounded = styled(Button)`
 
 export default props => (
   <ButtonRounded onPress={props.onPress}>
-    <Text>Đăng nhập</Text>
+    <Text>{props.text}</Text>
   </ButtonRounded>
 );

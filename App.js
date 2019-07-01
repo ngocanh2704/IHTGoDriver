@@ -1,63 +1,34 @@
 import React from "react";
 import { StatusBar } from "react-native";
-import rootReducer from "./src/reducers";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import Navigation from "./routes";
-import { SET_LOCATION } from "./src/actions/types";
-import thunk from "redux-thunk";
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-function tracking(geolocation) {
-  return function(dispatch) {
-    setInterval(function() {
-      return geolocation.getCurrentPosition(
-        position => {
-          dispatch({
-            type: SET_LOCATION,
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
-        },
-        error => {
-          console.log(error);
-        },
-        { enableHighAccuracy: false, timeout: 20000 }
-      );
-    }, 1000);
-  };
-}
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+import { store } from "./store";
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      intervalId: null
-    };
   }
 
-  // getLocation = () => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     position => {
-  //       this.props.dispatch({
-  //         type: SET_LOCATION,
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude
-  //       });
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     },
-  //     { enableHighAccuracy: false, timeout: 20000 }
-  //   );
-  // };
-
   componentDidMount() {
-    store.dispatch(tracking(navigator.geolocation));
+    LocationServicesDialogBox.checkLocationServicesIsEnabled({
+      message:
+        "<h2>Bật định vị đi mày</h2>This app wants to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location",
+      ok: "YES",
+      cancel: "NO",
+      enableHighAccuracy: true,
+      showDialog: true,
+      openLocationServices: true,
+      preventOutSideTouch: false,
+      preventBackClick: false,
+      providerListener: true
+    })
+      .then((success => {}).bind(this))
+      .catch(error => {
+        console.log(error.message);
+      });
   }
 
   render() {
