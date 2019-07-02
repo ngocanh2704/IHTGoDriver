@@ -11,6 +11,10 @@ class Login extends PureComponent {
     super(props);
   }
 
+  componentDidMount() {
+    console.log("notif");
+  }
+
   handleChangeUsername = event => {
     this.props.dispatch({
       type: SET_USERNAME,

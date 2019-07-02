@@ -138,8 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-pure-notification')
     implementation project(':react-native-android-location-services-dialog-box')
-    implementation project(':react-native-maps')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
