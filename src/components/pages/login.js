@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import { View, Text } from "native-base";
-import { ImageBackground, Image, StyleSheet } from "react-native";
+import { ImageBackground, Image, StyleSheet, Platform } from "react-native";
 import { LoginForm } from "../organisms";
 import { connect } from "react-redux";
 import { SET_USERNAME, SET_PASSWORD } from "../../actions/types";
 import toast from "../../utilities/toast";
+import localNotify from "../../utilities/localNotification";
 
 class Login extends PureComponent {
   constructor(props) {
@@ -12,7 +13,7 @@ class Login extends PureComponent {
   }
 
   componentDidMount() {
-    console.log("notif");
+    localNotify();
   }
 
   handleChangeUsername = event => {
@@ -30,6 +31,7 @@ class Login extends PureComponent {
   };
 
   submitLogin = () => {
+    this.props.alert.alertWithType("error", "Error", "12345678");
     this.props.navigation.navigate("MainScreen");
     if (this.props.username === "admin")
       this.props.navigation.navigate("MainScreen");
@@ -37,6 +39,7 @@ class Login extends PureComponent {
   };
 
   render() {
+    console.log();
     return (
       <ImageBackground
         source={require("../../../assest/1.jpg")}
@@ -72,7 +75,8 @@ class Login extends PureComponent {
 }
 
 export default connect(state => ({
-  username: state.login.username
+  username: state.login.username,
+  alert: state.alert.alert
 }))(Login);
 
 const styles = StyleSheet.create({
