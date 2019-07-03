@@ -1,33 +1,30 @@
-import React from "react";
-import { Button, Fab, View } from "native-base";
+import React, { Component } from "react";
+import ActionButton from "react-native-action-button";
 import { Icon } from "../atoms";
-import styled from "styled-components";
+import { Linking } from "react-native";
 
-const StyledFab = styled(Fab)`
-  background-color: ${props => props.theme.notifyColor};
-`;
-
-export default class ProFileForm extends React.PureComponent {
-  state = {
-    active: false
-  };
-
+export default class Fab extends Component {
   render() {
+    const senderNumber = "123";
+    const receiverNumber = "123";
     return (
-      <StyledFab
-        active={this.state.active}
-        direction="up"
-        position="bottomRight"
-        onPress={() => this.setState({ active: !this.state.active })}
-      >
-        <Icon type="AntDesign" name="appstore-o" />
-        <Button style={{ backgroundColor: "#c62828" }}>
-          <Icon name="logo-whatsapp" />
-        </Button>
-        <Button style={{ backgroundColor: "#c62828" }}>
-          <Icon name="logo-facebook" />
-        </Button>
-      </StyledFab>
+      <ActionButton buttonColor="rgba(231,76,60,1)">
+        <ActionButton.Item
+          title="Gọi cho người gửi"
+          onPress={() => Linking.openURL(`tel:${senderNumber}`)}
+        >
+          <Icon name="md-call" />
+        </ActionButton.Item>
+        <ActionButton.Item
+          title="Gọi cho người nhận"
+          onPress={() => Linking.openURL(`tel:${receiverNumber}`)}
+        >
+          <Icon name="md-call" />
+        </ActionButton.Item>
+        <ActionButton.Item title="Bắt đầu giao hàng">
+          <Icon name="md-bicycle" />
+        </ActionButton.Item>
+      </ActionButton>
     );
   }
 }

@@ -45,7 +45,7 @@ export default class Main extends Component {
             <Tab
               heading={
                 <TabHeading style={{ backgroundColor: "#c62828" }}>
-                  <Text>ĐANG GIAO</Text>
+                  <Text>CHƯA GIAO</Text>
                 </TabHeading>
               }
             >

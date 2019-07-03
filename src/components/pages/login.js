@@ -31,7 +31,11 @@ class Login extends PureComponent {
   };
 
   submitLogin = () => {
-    this.props.alert.alertWithType("error", "Error", "12345678");
+    this.props.alert.alertWithType(
+      "error",
+      "có đơn hàng mới",
+      "#12345 cần ship gấp qua Mỹ"
+    );
     this.props.navigation.navigate("MainScreen");
     if (this.props.username === "admin")
       this.props.navigation.navigate("MainScreen");

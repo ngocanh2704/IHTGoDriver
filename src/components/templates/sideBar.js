@@ -1,5 +1,11 @@
 import React, { PureComponent } from "react";
-import { View, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+  Image
+} from "react-native";
 import { Row, Col } from "native-base";
 import { DarkIcon, Icon, TextMenu as Text } from "../atoms";
 
@@ -12,13 +18,20 @@ export default class DrawerComponent extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.header_logo}>
+          <Image
+            style={{
+              marginRight: "auto",
+              marginLeft: "auto",
+              height: 60,
+              width: 90
+            }}
+            source={require("../../../assest/logo.png")}
+          />
+        </View>
         <View style={styles.header}>
           <Row size={3}>
             <Col style={privateStyle.center}>
-              <Icon
-                name="ios-contacts"
-                style={{ fontSize: responsiveFontSize(10) }}
-              />
               <Text style={styles.header_id}>name</Text>
               <Text style={styles.pointText}>Phone</Text>
               <Text style={styles.pointText}>Email</Text>
@@ -99,8 +112,12 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    flex: 3 / 10,
-    backgroundColor: "#c62828"
+    flex: 2 / 10,
+    backgroundColor: "#b71c1c"
+  },
+  header_logo: {
+    padding: 20,
+    backgroundColor: "#fff"
   },
   header_id: {
     paddingTop: 5,
@@ -110,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(3)
   },
   menu: {
-    flex: 7 / 10,
+    flex: 8 / 10,
     padding: 10,
     backgroundColor: "#fff"
   },

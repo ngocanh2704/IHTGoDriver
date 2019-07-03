@@ -41,7 +41,9 @@ export default class ProFileForm extends React.PureComponent {
           <Icon type="AntDesign" name="phone" />
           <Input placeholder="số điện thoại" />
         </Item>
-        <Item>
+        <Item
+          style={{ borderBottomWidth: 0, paddingTop: 20, paddingBottom: 10 }}
+        >
           <Icon type="AntDesign" name="user" />
           <CheckBox text="Nam" checked={true} />
           <CheckBox text="Nữ" checked={false} />

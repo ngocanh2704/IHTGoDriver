@@ -31,15 +31,8 @@ export default class DetailComponent extends PureComponent {
           >
             <OrderMap />
           </Tab>
-          <Tab
-            heading={
-              <TabHeading style={{ backgroundColor: "#c62828" }}>
-                <Text>CHAT</Text>
-              </TabHeading>
-            }
-          />
         </Tabs>
-        <Fab />
+        <Fab rating={() => this.props.navigation.navigate("RatingScreen")} />
       </Container>
     );
   }
