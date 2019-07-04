@@ -11,7 +11,7 @@ export { default as TextNormal } from "./texts/textNormal";
 export { default as TextOrder } from "./texts/textOrder";
 export { default as TextBadgeComplete } from "./texts/textBadgeComplete";
 export { default as TextBadgePending } from "./texts/textBadgePending";
-export { default as TextBadgeProcessing } from "./texts/textBadgeProcessing";
 export { default as TextOrderID } from "./texts/textOrderID";
 export { default as DarkOrderIcon } from "./icons/darkOrderIcon";
 export { default as CheckBox } from "./checkBox";
+export { default as ButtonPaging } from "./buttonPaging";

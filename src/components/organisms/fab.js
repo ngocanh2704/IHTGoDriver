@@ -8,7 +8,7 @@ export default class Fab extends Component {
     const senderNumber = "123";
     const receiverNumber = "123";
     return (
-      <ActionButton buttonColor="rgba(231,76,60,1)">
+      <ActionButton buttonColor="#b71c1c">
         <ActionButton.Item
           title="Gọi cho người gửi"
           onPress={() => Linking.openURL(`tel:${senderNumber}`)}

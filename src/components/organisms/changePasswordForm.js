@@ -19,6 +19,7 @@ export default props => (
         placeholder="mật khẩu cũ"
         value={props.username}
         onChangeText={props.setUsername}
+        secureTextEntry={true}
       />
     </Item>
     <Item>
@@ -27,6 +28,7 @@ export default props => (
         placeholder="mật khẩu mới"
         value={props.password}
         onChange={props.setPassword}
+        secureTextEntry={true}
       />
     </Item>
     <Item>
@@ -35,8 +37,13 @@ export default props => (
         placeholder="nhập lại mật khẩu mới"
         value={props.password}
         onChange={props.setPassword}
+        secureTextEntry={true}
       />
     </Item>
-    <Button onPress={props.login} text="Đổi mật khẩu" />
+    <Button
+      onPress={props.login}
+      text="Đổi mật khẩu"
+      style={{ marginBottom: 20 }}
+    />
   </Form>
 );

@@ -1,11 +1,37 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
+import { BackHandler } from "react-native";
 import { Container, Tab, Tabs } from "native-base";
 import { AllOrder, Pending, Success, SideBar } from "../templates";
 import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
 import { MainHeader as Header } from "../organisms";
+import { NavigationEvents } from "react-navigation";
+import axios from "../../utilities/axios";
 
-export default class Main extends Component {
+export default class Main extends PureComponent {
+  componentDidMount() {
+    axios
+      .post("driver/orders", {
+        pageSize: 10,
+        page: 1,
+        status: 4
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+
+  _onBlurr = () => {
+    BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
+  };
+
+  _onFocus = () => {
+    BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
+  };
+
+  handleBackButton = () => {
+    return true;
+  };
+
   closeDrawer = () => {
     this.drawer._root.close();
   };
@@ -28,6 +54,10 @@ export default class Main extends Component {
         onClose={this.closeDrawer}
       >
         <Container>
+          <NavigationEvents
+            onWillFocus={this._onFocus}
+            onWillBlur={this._onBlurr}
+          />
           <Header openDrawer={this.openDrawer} />
           <Tabs
             locked={true}

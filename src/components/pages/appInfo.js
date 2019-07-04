@@ -38,6 +38,20 @@ export default class AppInfo extends PureComponent {
               </Body>
             </CardItem>
           </Card>
+
+          <Card>
+            <CardItem bordered header>
+              <Icon name="md-apps" />
+              <TextOrder>Credits</TextOrder>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>Author: NAD</Text>
+                <Text>Copyrights by IHT GO, 2019</Text>
+                <Text>All right reserved</Text>
+              </Body>
+            </CardItem>
+          </Card>
         </Content>
       </Container>
     );

@@ -35,6 +35,12 @@ export default class DrawerComponent extends PureComponent {
               <Text style={styles.header_id}>name</Text>
               <Text style={styles.pointText}>Phone</Text>
               <Text style={styles.pointText}>Email</Text>
+              <TouchableOpacity
+                style={styles.menu_item}
+                onPress={() => this.props.navigator.navigate("ProfileScreen")}
+              >
+                <Icon type="MaterialCommunityIcons" name="account-edit" />
+              </TouchableOpacity>
             </Col>
           </Row>
         </View>
@@ -49,32 +55,6 @@ export default class DrawerComponent extends PureComponent {
             </Col>
             <Col size={5}>
               <Text>Thông tin ứng dụng</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.menu_item}
-            onPress={() => this.props.navigator.navigate("ProfileScreen")}
-          >
-            <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="setting" />
-            </Col>
-            <Col size={5}>
-              <Text>Cập nhật profile</Text>
-            </Col>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.menu_item}
-            onPress={() =>
-              this.props.navigator.navigate("ChangePasswordScreen")
-            }
-          >
-            <Col size={1} style={privateStyle.center}>
-              <DarkIcon type="AntDesign" name="Safety" />
-            </Col>
-            <Col size={5}>
-              <Text>Thay đổi mật khẩu</Text>
             </Col>
           </TouchableOpacity>
 
@@ -112,7 +92,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    flex: 2 / 10,
+    flex: 3 / 10,
     backgroundColor: "#b71c1c"
   },
   header_logo: {
@@ -127,7 +107,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(3)
   },
   menu: {
-    flex: 8 / 10,
+    flex: 7 / 10,
     padding: 10,
     backgroundColor: "#fff"
   },

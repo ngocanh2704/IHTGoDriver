@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import { View, Text } from "native-base";
-import { ImageBackground, Image, StyleSheet, Platform } from "react-native";
+import { ImageBackground, Image, StyleSheet } from "react-native";
 import { LoginForm } from "../organisms";
 import { connect } from "react-redux";
 import { SET_USERNAME, SET_PASSWORD } from "../../actions/types";
 import toast from "../../utilities/toast";
 import localNotify from "../../utilities/localNotification";
+import axios from "../../utilities/axios";
+import AsyncStorage from "@react-native-community/async-storage";
 
 class Login extends PureComponent {
   constructor(props) {
@@ -31,19 +33,24 @@ class Login extends PureComponent {
   };
 
   submitLogin = () => {
+    toast("Sai mật khẩu !");
+    axios
+      .post("driver/login", { phone: "0946336663", password: "111111" })
+      .then(res => {
+        console.log(res.data);
+        AsyncStorage.setItem("@token", res.data.token);
+        this.props.navigation.navigate("MainScreen");
+      })
+      .catch(err => console.log(err));
+
     this.props.alert.alertWithType(
       "error",
       "có đơn hàng mới",
       "#12345 cần ship gấp qua Mỹ"
     );
-    this.props.navigation.navigate("MainScreen");
-    if (this.props.username === "admin")
-      this.props.navigation.navigate("MainScreen");
-    else toast("Sai mật khẩu !");
   };
 
   render() {
-    console.log();
     return (
       <ImageBackground
         source={require("../../../assest/1.jpg")}

@@ -1,13 +1,6 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { AllOrder, Pending, Success } from "./src/components/templates";
-import {
-  Main,
-  Login,
-  Detail,
-  Profile,
-  AppInfo,
-  ChangePassword
-} from "./src/components/pages";
+import { Main, Login, Detail, Profile, AppInfo } from "./src/components/pages";
 
 const Screens = createStackNavigator({
   LoginScreen: {
@@ -31,12 +24,6 @@ const Screens = createStackNavigator({
   },
   AppInfoScreen: {
     screen: AppInfo,
-    navigationOptions: {
-      header: null
-    }
-  },
-  ChangePasswordScreen: {
-    screen: ChangePassword,
     navigationOptions: {
       header: null
     }

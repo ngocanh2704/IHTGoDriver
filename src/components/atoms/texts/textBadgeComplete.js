@@ -14,6 +14,6 @@ const StyledBadge = styled(Badge)`
 `;
 export default () => (
   <StyledBadge>
-    <StyledText>Đã hoàn thành</StyledText>
+    <StyledText>Đã giao</StyledText>
   </StyledBadge>
 );

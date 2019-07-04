@@ -17,7 +17,7 @@ export default props => (
     <Item>
       <Icon type="AntDesign" name="user" />
       <Input
-        placeholder="username"
+        placeholder="tài khoản"
         value={props.username}
         onChangeText={props.setUsername}
       />
@@ -25,14 +25,15 @@ export default props => (
     <Item>
       <Icon type="AntDesign" name="lock" />
       <Input
-        placeholder="password"
+        placeholder="mật khẩu"
         value={props.password}
         onChange={props.setPassword}
+        secureTextEntry={true}
       />
     </Item>
-    <Form>
+    {/* <Form>
       <Quote>Quên mật khẩu?</Quote>
-    </Form>
+    </Form> */}
     <View>
       <Button onPress={props.login} text="Đăng nhập" />
     </View>

@@ -29,11 +29,6 @@ class App extends React.PureComponent {
       .notifications()
       .onNotification(notification => {
         console.log("onNotification notification-->", notification);
-        console.log("onNotification notification.data -->", notification.data);
-        console.log(
-          "onNotification notification.notification -->",
-          notification.notification
-        );
         // Process your notification as required
         this.displayNotification(notification);
       });

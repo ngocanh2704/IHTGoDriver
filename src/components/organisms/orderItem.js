@@ -3,10 +3,8 @@ import { Body, Card, CardItem } from "native-base";
 import {
   TextNormal as Text,
   TextOrder,
-  TextOrderID,
   TextBadgeComplete,
-  TextBadgePending,
-  TextBadgeProcessing
+  TextBadgePending
 } from "../atoms";
 
 export default class ItemComponent extends PureComponent {
@@ -20,15 +18,12 @@ export default class ItemComponent extends PureComponent {
       return <TextBadgeComplete />;
     } else if (type === 2) {
       return <TextBadgePending />;
-    } else if (type === 3) {
-      return <TextBadgeProcessing />;
     }
   };
   render() {
     return (
       <Card>
         <CardItem style={{ height: 50 }}>
-          <TextOrderID>#1234</TextOrderID>
           <TextOrder>Tên đơn hàng</TextOrder>
           {this.renderBadge()}
         </CardItem>
