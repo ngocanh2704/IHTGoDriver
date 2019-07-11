@@ -4,34 +4,55 @@ import {
   TextNormal as Text,
   TextOrder,
   TextBadgeComplete,
-  TextBadgePending
+  TextBadgePending,
+  DarkIcon
 } from "../atoms";
+import { connect } from "react-redux";
 
-export default class ItemComponent extends PureComponent {
+class ItemComponent extends PureComponent {
+  state = {
+    order: []
+  };
+
   constructor(props) {
     super(props);
   }
 
-  renderBadge = () => {
-    const { type } = this.props;
-    if (type === 1) {
-      return <TextBadgeComplete />;
-    } else if (type === 2) {
-      return <TextBadgePending />;
-    }
+  componentDidMount() {
+    this.setState({
+      order: this.props.item
+    });
+  }
+
+  renderBadge = type => {
+    if (type === 4) return <TextBadgeComplete />;
+    else if (type === 2 || type === 3) return <TextBadgePending />;
+    else return <TextBadgeComplete />;
   };
+
   render() {
     return (
-      <Card>
+      <Card key={this.state.order.id}>
         <CardItem style={{ height: 50 }}>
-          <TextOrder>Tên đơn hàng</TextOrder>
-          {this.renderBadge()}
+          <TextOrder>
+            {this.state.order.is_speed ? (
+              <DarkIcon type="AntDesign" name="rocket1" />
+            ) : null}
+            {" " + this.state.order.name}
+          </TextOrder>
+          {this.renderBadge(this.state.order.status)}
         </CardItem>
         <CardItem>
           <Body>
-            <Text>Tổng tiền: 12345 VNĐ</Text>
-            <Text>Loại: giao thường</Text>
-            <Text>Ngày: 1/1/2020</Text>
+            <Text>
+              Tổng tiền:
+              {this.state.order.total_price}
+              VNĐ
+            </Text>
+            <Text>
+              Loại: {this.props.orderType[this.state.order.car_option]}
+            </Text>
+            <Text>Ngày: {this.state.order.created_at}</Text>
           </Body>
         </CardItem>
       </Card>
@@ -39,6 +60,6 @@ export default class ItemComponent extends PureComponent {
   }
 }
 
-ItemComponent.defaultProps = {
-  type: 1
-};
+export default connect(state => ({
+  orderType: state.constant.orderType
+}))(ItemComponent);

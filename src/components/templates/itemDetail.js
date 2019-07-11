@@ -1,12 +1,42 @@
 import React, { PureComponent } from "react";
-import { Content, Body, Card, CardItem } from "native-base";
+import { Content, Body, Card, CardItem, Spinner } from "native-base";
 import { TextNormal as Text, TextOrder, DarkIcon as Icon } from "../atoms";
+import { withNavigation } from "react-navigation";
+import axios from "../../utilities/axios";
+import toast from "../../utilities/toast";
 
-export default class ItemDetail extends PureComponent {
+class ItemDetail extends PureComponent {
+  state = {
+    isLoading: true,
+    order: []
+  };
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const id = navigation.getParam("id", 0);
+    axios
+      .get("driver/order-detail/" + id)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          order: res.data,
+          isLoading: false
+        });
+      })
+      .catch(err => {
+        this.setState({
+          isLoading: false
+        });
+        toast("Lỗi không lấy được dữ liệu đơn hàng");
+      });
+  }
+
   render() {
-    return (
+    return this.state.isLoading ? (
+      <Spinner color="red" />
+    ) : (
       <>
-        <Content style={privateStyle.container}>
+        <Content style={{ padding: 5 }}>
           <Card>
             <CardItem bordered>
               <Icon name="ios-information-circle" />
@@ -66,8 +96,4 @@ export default class ItemDetail extends PureComponent {
   }
 }
 
-const privateStyle = {
-  container: {
-    padding: 5
-  }
-};
+export default withNavigation(ItemDetail);

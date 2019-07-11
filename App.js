@@ -9,6 +9,7 @@ import { Platform, StatusBar } from "react-native";
 import firebase from "react-native-firebase";
 import DropdownAlert from "react-native-dropdownalert";
 import { SET_ALERT } from "./src/actions/types";
+import AsyncStorage from "@react-native-community/async-storage";
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -92,7 +93,11 @@ class App extends React.PureComponent {
       .catch(error => {
         console.log(error.message);
       });
+
+    this.initConstants();
   }
+
+  initConstants = () => {};
 
   componentWillUnmount() {
     this.notificationListener();

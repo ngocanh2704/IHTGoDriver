@@ -1,25 +1,13 @@
 import React, { PureComponent } from "react";
 import { BackHandler } from "react-native";
 import { Container, Tab, Tabs } from "native-base";
-import { AllOrder, Pending, Success, SideBar } from "../templates";
+import { OrderList, SideBar } from "../templates";
 import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
 import { MainHeader as Header } from "../organisms";
 import { NavigationEvents } from "react-navigation";
-import axios from "../../utilities/axios";
 
 export default class Main extends PureComponent {
-  componentDidMount() {
-    axios
-      .post("driver/orders", {
-        pageSize: 10,
-        page: 1,
-        status: 4
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
-
   _onBlurr = () => {
     BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
   };
@@ -38,10 +26,6 @@ export default class Main extends PureComponent {
 
   openDrawer = () => {
     this.drawer._root.open();
-  };
-
-  navigateToDetail = id => {
-    this.props.navigation.navigate("OrderDetailScreen");
   };
 
   render() {
@@ -70,7 +54,7 @@ export default class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <AllOrder navigate={this.navigateToDetail} />
+              <OrderList type={0} />
             </Tab>
             <Tab
               heading={
@@ -79,7 +63,7 @@ export default class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <Pending />
+              <OrderList type={2} />
             </Tab>
             <Tab
               heading={
@@ -88,7 +72,7 @@ export default class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <Success />
+              <OrderList type={4} />
             </Tab>
           </Tabs>
         </Container>

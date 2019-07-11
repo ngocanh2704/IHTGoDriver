@@ -1,5 +1,5 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import { AllOrder, Pending, Success } from "./src/components/templates";
+import { OrderList } from "./src/components/templates";
 import { Main, Login, Detail, Profile, AppInfo } from "./src/components/pages";
 
 const Screens = createStackNavigator({
@@ -28,20 +28,8 @@ const Screens = createStackNavigator({
       header: null
     }
   },
-  AllOrderScreen: {
-    screen: AllOrder,
-    navigationOptions: {
-      header: null
-    }
-  },
-  PendingScreen: {
-    screen: Pending,
-    navigationOptions: {
-      header: null
-    }
-  },
-  SuccessScreen: {
-    screen: Success,
+  OrderListScreen: {
+    screen: OrderList,
     navigationOptions: {
       header: null
     }

@@ -34,8 +34,12 @@ class Login extends PureComponent {
 
   submitLogin = () => {
     toast("Sai mật khẩu !");
+    this.props.navigation.navigate("MainScreen");
     axios
-      .post("driver/login", { phone: "0946336663", password: "111111" })
+      .post("login", {
+        phone: "0946336663",
+        password: "111111"
+      })
       .then(res => {
         console.log(res.data);
         AsyncStorage.setItem("@token", res.data.token);

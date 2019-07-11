@@ -11,7 +11,7 @@ import {
 const Form = styled(View)`
   margin-top: 20px;
 `;
-
+  
 export default props => (
   <Form>
     <Item>

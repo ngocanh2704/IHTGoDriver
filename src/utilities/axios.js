@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
-const API_URL = "https://admin.ihtgo.com.vn/api/v1";
+const API_URL = "http://api.ihtgo.com.vn/";
 
 axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common.Accept = "application/x-www-form-urlencoded";
