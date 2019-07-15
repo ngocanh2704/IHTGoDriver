@@ -5,9 +5,11 @@ import styled from "styled-components";
 import {
   InputNormal as Input,
   ButtonFilled as Button,
-  DarkIcon as Icon,
-  CheckBox
+  DarkIcon as Icon
 } from "../atoms";
+import { connect } from "react-redux";
+import { SET_NAME, SET_EMAIL, SET_PHONE } from "../../actions/types";
+import { emailValidate } from "../../utilities/regex";
 
 const Form = styled(View)`
   margin: 20px;
@@ -23,8 +25,41 @@ const responsiveFontSize = f => {
 };
 const { height, width } = Dimensions.get("window");
 
-export default class ProFileForm extends React.PureComponent {
+class ProFileForm extends React.PureComponent {
+  state = {
+    id: "",
+    name: "",
+    phone: "",
+    email: ""
+  };
+
+  componentDidMount() {
+    const { id, name, phone, email } = this.props;
+    this.setState({
+      id,
+      name,
+      phone,
+      email
+    });
+  }
+
+  changeInfo = () => {
+    const { email } = this.state;
+    if (!emailValidate(email)) {
+      this.props.alert.alertWithType("error", "Lỗi", "Email không hợp lệ");
+      return null;
+    }
+  };
+
+  changeInput = (name, value) => {
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
+    const { name, phone, email } = this.state;
+
     return (
       <Form>
         <Avatar>
@@ -35,27 +70,41 @@ export default class ProFileForm extends React.PureComponent {
         </Avatar>
         <Item>
           <Icon type="AntDesign" name="idcard" />
-          <Input placeholder="họ và tên" />
+          <Input
+            placeholder="họ và tên"
+            value={name}
+            onChangeText={txt => this.changeInput("name", txt)}
+          />
         </Item>
         <Item>
           <Icon type="AntDesign" name="phone" />
-          <Input placeholder="số điện thoại" />
-        </Item>
-        <Item
-          style={{ borderBottomWidth: 0, paddingTop: 20, paddingBottom: 10 }}
-        >
-          <Icon type="AntDesign" name="user" />
-          <CheckBox text="Nam" checked={true} />
-          <CheckBox text="Nữ" checked={false} />
+          <Input
+            placeholder="số điện thoại"
+            value={phone}
+            keyboardType="numeric"
+            onChangeText={txt => this.changeInput("phone", txt)}
+          />
         </Item>
         <Item>
-          <Icon type="AntDesign" name="enviromento" />
-          <Input placeholder="địa chỉ liên hệ" />
+          <Icon type="AntDesign" name="mail" />
+          <Input
+            placeholder="email"
+            value={email}
+            onChangeText={txt => this.changeInput("email", txt)}
+          />
         </Item>
         <View>
-          <Button onPress={this.props.login} text="Thay đổi thông tin" />
+          <Button onPress={this.changeInfo} text="Thay đổi thông tin" />
         </View>
       </Form>
     );
   }
 }
+
+export default connect(state => ({
+  id: state.userInfo.id,
+  name: state.userInfo.name,
+  phone: state.userInfo.phone,
+  email: state.userInfo.email,
+  alert: state.alert.alert
+}))(ProFileForm);

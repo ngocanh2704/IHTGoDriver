@@ -12,7 +12,7 @@ export default class Profile extends PureComponent {
       <Container>
         <Header
           back={() => this.props.navigation.goBack()}
-          title="Cập nhật profile"
+          title="Cập nhật thông tin cá nhân"
         />
         <ProfileForm />
         <ChangePasswordForm />

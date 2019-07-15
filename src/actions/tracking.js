@@ -11,11 +11,9 @@ export const tracking = geolocation => {
             lng: position.coords.longitude
           });
         },
-        error => {
-          console.log(error);
-        },
+        error => {},
         { enableHighAccuracy: false, timeout: 20000 }
       );
-    }, 1000);
+    }, 5000);
   };
 };

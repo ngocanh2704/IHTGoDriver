@@ -11,13 +11,14 @@ import {
 const Form = styled(View)`
   margin-top: 20px;
 `;
-  
+
 export default props => (
   <Form>
     <Item>
       <Icon type="AntDesign" name="user" />
       <Input
-        placeholder="tài khoản"
+        placeholder="số điện thoại"
+        keyboardType="numeric"
         value={props.username}
         onChangeText={props.setUsername}
       />

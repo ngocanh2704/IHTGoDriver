@@ -5,9 +5,11 @@ import {
   TextOrder,
   TextBadgeComplete,
   TextBadgePending,
+  TextBadgeProcessing,
   DarkIcon
 } from "../atoms";
 import { connect } from "react-redux";
+import { toCurrency } from "../../utilities/regex";
 
 class ItemComponent extends PureComponent {
   state = {
@@ -26,13 +28,14 @@ class ItemComponent extends PureComponent {
 
   renderBadge = type => {
     if (type === 4) return <TextBadgeComplete />;
-    else if (type === 2 || type === 3) return <TextBadgePending />;
+    else if (type === 2) return <TextBadgePending />;
+    else if (type === 3) return <TextBadgeProcessing />;
     else return <TextBadgeComplete />;
   };
 
   render() {
     return (
-      <Card key={this.state.order.id}>
+      <Card>
         <CardItem style={{ height: 50 }}>
           <TextOrder>
             {this.state.order.is_speed ? (
@@ -46,7 +49,7 @@ class ItemComponent extends PureComponent {
           <Body>
             <Text>
               Tổng tiền:
-              {this.state.order.total_price}
+              {toCurrency(this.state.order.total_price)}
               VNĐ
             </Text>
             <Text>

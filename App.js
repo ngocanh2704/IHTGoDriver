@@ -29,8 +29,6 @@ class App extends React.PureComponent {
     this.notificationListener = firebase
       .notifications()
       .onNotification(notification => {
-        console.log("onNotification notification-->", notification);
-        // Process your notification as required
         this.displayNotification(notification);
       });
   }
@@ -90,9 +88,7 @@ class App extends React.PureComponent {
       providerListener: true
     })
       .then((success => {}).bind(this))
-      .catch(error => {
-        console.log(error.message);
-      });
+      .catch(error => {});
 
     this.initConstants();
   }

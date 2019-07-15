@@ -20,25 +20,10 @@ export default class AppInfo extends PureComponent {
             <CardItem>
               <Body>
                 <Text>Số phiên bản: 2.0</Text>
-                <Text>Mã người dùng: 123456</Text>
+                <Text>Mã người dùng: </Text>
               </Body>
             </CardItem>
           </Card>
-
-          <Card>
-            <CardItem bordered header>
-              <Icon type="AntDesign" name="mobile1" />
-              <TextOrder>Hệ thống</TextOrder>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>Tên thiết bị: 234</Text>
-                <Text>ID: </Text>
-                <Text>Hệ điều hành: </Text>
-              </Body>
-            </CardItem>
-          </Card>
-
           <Card>
             <CardItem bordered header>
               <Icon name="md-apps" />

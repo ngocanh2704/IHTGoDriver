@@ -3,7 +3,7 @@ import { View, Text } from "native-base";
 import { ImageBackground, Image, StyleSheet } from "react-native";
 import { LoginForm } from "../organisms";
 import { connect } from "react-redux";
-import { SET_USERNAME, SET_PASSWORD } from "../../actions/types";
+import { SET_USERNAME, SET_PASSWORD, SET_USER_INFO } from "../../actions/types";
 import toast from "../../utilities/toast";
 import localNotify from "../../utilities/localNotification";
 import axios from "../../utilities/axios";
@@ -15,7 +15,7 @@ class Login extends PureComponent {
   }
 
   componentDidMount() {
-    localNotify();
+    //localNotify();
   }
 
   handleChangeUsername = event => {
@@ -33,25 +33,31 @@ class Login extends PureComponent {
   };
 
   submitLogin = () => {
-    toast("Sai mật khẩu !");
-    this.props.navigation.navigate("MainScreen");
+    // toast("Sai mật khẩu !");
     axios
       .post("login", {
         phone: "0946336663",
         password: "111111"
       })
       .then(res => {
-        console.log(res.data);
-        AsyncStorage.setItem("@token", res.data.token);
-        this.props.navigation.navigate("MainScreen");
+        this.props.dispatch({
+          type: SET_USER_INFO,
+          id: res.data.id,
+          name: res.data.name,
+          phone: res.data.phone,
+          email: res.data.email
+        });
+        AsyncStorage.setItem("@token", res.data.token).then(() =>
+          this.props.navigation.navigate("MainScreen")
+        );
       })
-      .catch(err => console.log(err));
+      .catch(err => {});
 
-    this.props.alert.alertWithType(
-      "error",
-      "có đơn hàng mới",
-      "#12345 cần ship gấp qua Mỹ"
-    );
+    // this.props.alert.alertWithType(
+    //   "error",
+    //   "có đơn hàng mới",
+    //   "#12345 cần ship gấp qua Mỹ"
+    // );
   };
 
   render() {

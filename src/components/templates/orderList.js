@@ -62,6 +62,7 @@ class OrderList extends React.PureComponent {
     return this.state.orders.map(item => {
       return (
         <TouchableOpacity
+          key={item.id}
           onPress={() => {
             this.props.navigation.navigate("OrderDetailScreen", {
               id: item.id

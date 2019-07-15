@@ -6,8 +6,14 @@ import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
 import { MainHeader as Header } from "../organisms";
 import { NavigationEvents } from "react-navigation";
+import { tracking } from "../../actions/tracking";
+import { connect } from "react-redux";
 
-export default class Main extends PureComponent {
+class Main extends PureComponent {
+  componentDidMount() {
+    this.props.dispatch(tracking(navigator.geolocation));
+  }
+
   _onBlurr = () => {
     BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
   };
@@ -80,3 +86,5 @@ export default class Main extends PureComponent {
     );
   }
 }
+
+export default connect()(Main);

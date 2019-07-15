@@ -8,13 +8,25 @@ import {
 } from "react-native";
 import { Row, Col } from "native-base";
 import { DarkIcon, Icon, TextMenu as Text } from "../atoms";
+import { connect } from "react-redux";
+import axios from "../../utilities/axios";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const responsiveFontSize = f => {
   return Math.sqrt(height * height + width * width) * (f / 100);
 };
 const { height, width } = Dimensions.get("window");
 
-export default class DrawerComponent extends PureComponent {
+class SideBar extends PureComponent {
+  logout = () => {
+    axios
+      .get("driver/logout")
+      .then(res => {
+        this.props.navigator.navigate("LoginScreen");
+      })
+      .catch(err => {});
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,9 +44,9 @@ export default class DrawerComponent extends PureComponent {
         <View style={styles.header}>
           <Row size={3}>
             <Col style={privateStyle.center}>
-              <Text style={styles.header_id}>name</Text>
-              <Text style={styles.pointText}>Phone</Text>
-              <Text style={styles.pointText}>Email</Text>
+              <Text style={styles.header_id}>{this.props.name}</Text>
+              <Text style={styles.pointText}>{this.props.phone}</Text>
+              <Text style={styles.pointText}>{this.props.email}</Text>
               <TouchableOpacity
                 style={styles.menu_item}
                 onPress={() => this.props.navigator.navigate("ProfileScreen")}
@@ -59,10 +71,7 @@ export default class DrawerComponent extends PureComponent {
           </TouchableOpacity>
 
           <View style={privateStyle.border} />
-          <TouchableOpacity
-            style={styles.menu_item}
-            onPress={() => this.props.navigator.navigate("LoginScreen")}
-          >
+          <TouchableOpacity style={styles.menu_item} onPress={this.logout}>
             <Col size={1} style={privateStyle.center}>
               <DarkIcon type="AntDesign" name="poweroff" />
             </Col>
@@ -133,3 +142,10 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
+
+export default connect(state => ({
+  id: state.userInfo.id,
+  name: state.userInfo.name,
+  phone: state.userInfo.phone,
+  email: state.userInfo.email
+}))(SideBar);
