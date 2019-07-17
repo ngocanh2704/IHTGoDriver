@@ -3,7 +3,7 @@ import { List, Content, Spinner } from "native-base";
 import { OrderItem } from "../organisms";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
-import { ButtonFilled as Button } from "../atoms";
+import { ButtonFilled as Button, TextNormal as Text } from "../atoms";
 import axios from "../../utilities/axios";
 import toast from "../../utilities/toast";
 import { withNavigation } from "react-navigation";
@@ -83,8 +83,10 @@ class OrderList extends React.PureComponent {
         <List>{this.renderOrderList()}</List>
         {this.state.isLoadMore ? (
           <Spinner color="red" />
-        ) : (
+        ) : this.state.orders.length > 0 ? (
           <Button text="Xem thêm" onPress={this.loadMore} />
+        ) : (
+          <Text>Không có đơn hàng</Text>
         )}
       </Container>
     );

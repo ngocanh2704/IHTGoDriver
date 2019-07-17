@@ -3,24 +3,37 @@ import ActionButton from "react-native-action-button";
 import { Icon } from "../atoms";
 import { Linking } from "react-native";
 import { connect } from "react-redux";
-import { SET_ORDER_BOOKMARK } from "../../actions/types";
+import { SET_ORDER_BOOKMARK, REMOVE_ORDER_BOOKMARK } from "../../actions/types";
+import axios from "../../utilities/axios";
 
 class Fab extends PureComponent {
   startShipping = () => {
-    this.props.dispatch({
-      type: SET_ORDER_BOOKMARK,
-      id: this.props.id
-    });
+    axios
+      .get("driver/order-start/" + this.props.id)
+      .then(res => {
+        this.props.dispatch({
+          type: SET_ORDER_BOOKMARK,
+          id: this.props.id
+        });
+      })
+      .catch(err => {});
+  };
+
+  finishShipping = () => {
+    axios
+      .get("driver/order-finish/" + this.props.id)
+      .then(res => {
+        this.props.dispatch({
+          type: REMOVE_ORDER_BOOKMARK,
+          id: this.props.id
+        });
+      })
+      .catch(err => {});
   };
 
   render() {
-    const {
-      id,
-      current_status,
-      sender_number,
-      receive_number,
-      order_processing
-    } = this.props;
+    const { current_status, sender_number, receive_number } = this.props;
+
     return (
       <ActionButton buttonColor="#b71c1c">
         <ActionButton.Item
@@ -35,7 +48,7 @@ class Fab extends PureComponent {
         >
           <Icon name="md-call" />
         </ActionButton.Item>
-        {current_status === 2 && (
+        {current_status == 2 && (
           <ActionButton.Item
             title="Bắt đầu giao hàng"
             onPress={this.startShipping}
@@ -43,8 +56,11 @@ class Fab extends PureComponent {
             <Icon name="md-bicycle" />
           </ActionButton.Item>
         )}
-        {this.props.order_processing.includes(id) && (
-          <ActionButton.Item title="Hoàn thành đơn hàng">
+        {current_status == 3 && (
+          <ActionButton.Item
+            title="Hoàn thành đơn hàng"
+            onPress={this.finishShipping}
+          >
             <Icon name="md-bicycle" />
           </ActionButton.Item>
         )}
@@ -57,6 +73,5 @@ export default connect(state => ({
   id: state.constant.id,
   sender_number: state.constant.sender_number,
   receive_number: state.constant.receive_number,
-  current_status: state.constant.current_status,
-  order_processing: state.constant.order_processing
+  current_status: state.constant.current_status
 }))(Fab);

@@ -22,7 +22,7 @@ class ItemDetail extends PureComponent {
       .then(res => {
         this.props.dispatch({
           type: SET_CURRENT_ORDER,
-          id: res.data.id,
+          id,
           sender_number: res.data.sender_phone,
           receive_number: res.data.receive_phone,
           current_status: res.data.status
@@ -70,13 +70,11 @@ class ItemDetail extends PureComponent {
       <Content style={{ padding: 5 }}>
         <Card>
           <CardItem bordered>
-            <Icon name="ios-information-circle" />
-            <TextOrder>Thông tin đơn hàng</TextOrder>
+            <TextOrder>{name}</TextOrder>
           </CardItem>
           <CardItem>
             <Body>
               <Text>Mã đơn hàng: {code}</Text>
-              <Text>Tên đơn hàng: {name}</Text>
               <Text>Ngày tạo: {created_at}</Text>
               <Text>Loại đơn hàng: {this.props.orderType[car_option]}</Text>
               {payment_type === 1 && (

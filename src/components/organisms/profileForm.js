@@ -8,8 +8,8 @@ import {
   DarkIcon as Icon
 } from "../atoms";
 import { connect } from "react-redux";
-import { SET_NAME, SET_EMAIL, SET_PHONE } from "../../actions/types";
 import { emailValidate } from "../../utilities/regex";
+import axios from "../../utilities/axios";
 
 const Form = styled(View)`
   margin: 20px;
@@ -44,11 +44,28 @@ class ProFileForm extends React.PureComponent {
   }
 
   changeInfo = () => {
-    const { email } = this.state;
+    const { email, name, phone } = this.state;
     if (!emailValidate(email)) {
       this.props.alert.alertWithType("error", "Lỗi", "Email không hợp lệ");
       return null;
     }
+
+    axios
+      .post("driver/update", {
+        name,
+        phone,
+        email
+      })
+      .then(res => {
+        this.props.alert.alertWithType(
+          "success",
+          "Thành công",
+          "Đổi thông tin cá nhân thành công"
+        );
+      })
+      .catch(err => {
+        this.props.alert.alertWithType("error", "Lỗi", "Lỗi hệ thống");
+      });
   };
 
   changeInput = (name, value) => {

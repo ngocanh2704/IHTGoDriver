@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, Text } from "native-base";
+import { View, Text, Spinner } from "native-base";
 import { ImageBackground, Image, StyleSheet } from "react-native";
 import { LoginForm } from "../organisms";
 import { connect } from "react-redux";
@@ -10,12 +10,34 @@ import axios from "../../utilities/axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
 class Login extends PureComponent {
+  state = { isLoading: true };
+
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    //localNotify();
+  async componentDidMount() {
+    // localNotify();
+    await axios
+      .get("driver/verify")
+      .then(res => {
+        this.props.dispatch({
+          type: SET_USER_INFO,
+          id: res.data.user.id,
+          name: res.data.user.name,
+          phone: res.data.user.phone,
+          email: res.data.user.email
+        });
+
+        AsyncStorage.setItem("@token", res.data.token).then(() =>
+          this.props.navigation.navigate("MainScreen")
+        );
+      })
+      .catch(err => {});
+
+    this.setState({
+      isLoading: false
+    });
   }
 
   handleChangeUsername = event => {
@@ -61,7 +83,9 @@ class Login extends PureComponent {
   };
 
   render() {
-    return (
+    return this.state.isLoading ? (
+      <Spinner color="red" />
+    ) : (
       <ImageBackground
         source={require("../../../assest/1.jpg")}
         style={styles.imageBackGround}

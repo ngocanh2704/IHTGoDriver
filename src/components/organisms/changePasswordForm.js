@@ -32,6 +32,22 @@ class ChangePassword extends React.PureComponent {
       msg = "Mật khẩu xác nhận không trùng khớp";
 
     msg && this.props.alert.alertWithType("error", "Lỗi", msg);
+
+    axios
+      .post("driver/change-passwd", {
+        old_pwd: this.state.old_pwd,
+        new_pwd: this.state.new_pwd
+      })
+      .then(res => {
+        this.props.alert.alertWithType(
+          "success",
+          "Thành công",
+          "Đổi mật khẩu thành công"
+        );
+      })
+      .catch(err => {
+        this.props.alert.alertWithType("error", "Lỗi", "Lỗi hệ thống");
+      });
   };
 
   render() {

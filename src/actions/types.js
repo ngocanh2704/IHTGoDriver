@@ -8,3 +8,4 @@ export const SET_PHONE = "set_phone";
 export const SET_EMAIL = "set_email";
 export const SET_CURRENT_ORDER = "set_current_order";
 export const SET_ORDER_BOOKMARK = "set_order_bookmark";
+export const REMOVE_ORDER_BOOKMARK = "remove_order_bookmark";

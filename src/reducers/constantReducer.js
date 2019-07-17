@@ -1,4 +1,8 @@
-import { SET_CURRENT_ORDER, SET_ORDER_BOOKMARK } from "../actions/types";
+import {
+  SET_CURRENT_ORDER,
+  SET_ORDER_BOOKMARK,
+  REMOVE_ORDER_BOOKMARK
+} from "../actions/types";
 
 const initialState = {
   id: 0,
@@ -34,7 +38,19 @@ export default function(state = initialState, action) {
       new_arr.push(action.id);
       return {
         ...state,
-        order_processing: new_arr
+        order_processing: new_arr,
+        current_status: 3
+      };
+    case REMOVE_ORDER_BOOKMARK:
+      let newArr = state.order_processing;
+      var index = newArr.indexOf(action.id);
+      if (index > -1) {
+        newArr.splice(index, 1);
+      }
+      return {
+        ...state,
+        order_processing: newArr,
+        current_status: 4
       };
     default:
       return state;

@@ -33,15 +33,25 @@ class ItemComponent extends PureComponent {
     else return <TextBadgeComplete />;
   };
 
+  formatString(str) {
+    if (str) {
+      let newStr = str.slice(0, 35);
+      newStr += str.length > 35 ? "..." : "";
+      return newStr;
+    }
+    return null;
+  }
   render() {
+    if (this.state.order.name) {
+    }
     return (
       <Card>
-        <CardItem style={{ height: 50 }}>
+        <CardItem style={{ height: 50, paddingLeft: -10 }}>
           <TextOrder>
             {this.state.order.is_speed ? (
               <DarkIcon type="AntDesign" name="rocket1" />
             ) : null}
-            {" " + this.state.order.name}
+            {this.formatString(this.state.order.name)}
           </TextOrder>
           {this.renderBadge(this.state.order.status)}
         </CardItem>
