@@ -8,7 +8,6 @@ const initialState = {
   id: 0,
   sender_number: 0,
   receive_number: 0,
-  order_processing: [],
   current_status: 4,
   isSpeed: { 0: "Giao thường", 1: "Giao hỏa tốc" },
   orderType: {
@@ -34,22 +33,13 @@ export default function(state = initialState, action) {
         current_status: action.current_status
       };
     case SET_ORDER_BOOKMARK:
-      let new_arr = state.order_processing;
-      new_arr.push(action.id);
       return {
         ...state,
-        order_processing: new_arr,
         current_status: 3
       };
     case REMOVE_ORDER_BOOKMARK:
-      let newArr = state.order_processing;
-      var index = newArr.indexOf(action.id);
-      if (index > -1) {
-        newArr.splice(index, 1);
-      }
       return {
         ...state,
-        order_processing: newArr,
         current_status: 4
       };
     default:

@@ -138,6 +138,9 @@ android {
 }
 
 dependencies {
+    implementation(project(':react-native-geolocation-service')) {
+        exclude group: 'com.google.android.gms', module: 'play-services-location'
+    }
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-firebase')
     implementation project(':react-native-android-location-services-dialog-box')
@@ -148,6 +151,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.android.gms:play-services-location:15.0.0"
     implementation "com.google.firebase:firebase-core:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
 

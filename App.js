@@ -77,7 +77,7 @@ class App extends React.PureComponent {
 
     LocationServicesDialogBox.checkLocationServicesIsEnabled({
       message:
-        "<h2>Bật định vị đi mày</h2>This app wants to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location",
+        "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị để theo chính sách của công ty",
       ok: "YES",
       cancel: "NO",
       enableHighAccuracy: true,
@@ -89,11 +89,7 @@ class App extends React.PureComponent {
     })
       .then((success => {}).bind(this))
       .catch(error => {});
-
-    this.initConstants();
   }
-
-  initConstants = () => {};
 
   componentWillUnmount() {
     this.notificationListener();
