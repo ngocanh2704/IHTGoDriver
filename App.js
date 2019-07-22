@@ -3,23 +3,54 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import Navigation from "./routes";
-import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import { store } from "./store";
 import { Platform, StatusBar } from "react-native";
 import firebase from "react-native-firebase";
 import DropdownAlert from "react-native-dropdownalert";
-import { SET_ALERT } from "./src/actions/types";
-import AsyncStorage from "@react-native-community/async-storage";
+import {
+  SET_ALERT,
+  ADD_ALL_ORDER,
+  ADD_WAITING_ORDER
+} from "./src/actions/types";
+import axios from "./src/utilities/axios";
+import localNotification from "./src/utilities/localNotification";
+import { DeviceEventEmitter } from "react-native";
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+
+navigator.geolocation = require("@react-native-community/geolocation");
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.checkIsLocation().catch(error => error);
+
+    DeviceEventEmitter.addListener("locationProviderStatusChange", function(
+      status
+    ) {
+      console.log(status);
+    });
+  }
+
+  async checkIsLocation() {
+    let check = await LocationServicesDialogBox.checkLocationServicesIsEnabled({
+      message: "Use Location ?",
+      ok: "YES",
+      cancel: "NO",
+      enableHighAccuracy: true, // true => GPS AND NETWORK PROVIDER, false => GPS OR NETWORK PROVIDER
+      showDialog: true, // false => Opens the Location access page directly
+      openLocationServices: true, // false => Directly catch method is called if location services are turned off
+      preventOutSideTouch: false, //true => To prevent the location services window from closing when it is clicked outside
+      preventBackClick: false, //true => To prevent the location services popup from closing when it is clicked back button
+      providerListener: true // true ==> Trigger "locationProviderStatusChange" listener when the location state changes
+    }).catch(error => error);
+
+    return Object.is(check.status, "enabled");
   }
 
   subscribeToNotificationListeners() {
     const channel = new firebase.notifications.Android.Channel(
-      "notification_channel_name", // To be Replaced as per use
-      "Notifications", // To be Replaced as per use
+      "notification_channel_name",
+      "Notifications",
       firebase.notifications.Android.Importance.Max
     ).setDescription(
       "A Channel To manage the notifications related to Application"
@@ -29,9 +60,37 @@ class App extends React.PureComponent {
     this.notificationListener = firebase
       .notifications()
       .onNotification(notification => {
+        this.comingOrder(notification.data.order_id);
+        //display if foreground
         this.displayNotification(notification);
+        //display if online
+        store
+          .getState()
+          .alert.alert.alertWithType(
+            "error",
+            notification.title,
+            notification.body
+          );
       });
   }
+
+  comingOrder = order_id => {
+    axios
+      .post("driver/get-order", {
+        order_id
+      })
+      .then(res => {
+        store.dispatch({
+          type: ADD_ALL_ORDER,
+          order: res.data
+        });
+        store.dispatch({
+          type: ADD_WAITING_ORDER,
+          order: res.data
+        });
+      })
+      .catch(err => {});
+  };
 
   displayNotification = notification => {
     if (Platform.OS === "android") {
@@ -44,14 +103,14 @@ class App extends React.PureComponent {
         .setSubtitle(notification.subtitle)
         .setBody(notification.body)
         .setData(notification.data)
-        .android.setChannelId("notification_channel_name") // e.g. the id you chose above
-        .android.setSmallIcon("ic_launcher") // create this icon in Android Studio
+        .android.setChannelId("notification_channel_name")
+        .android.setSmallIcon("ic_launcher")
         .android.setPriority(firebase.notifications.Android.Priority.High);
 
       firebase
         .notifications()
         .displayNotification(localNotification)
-        .catch(err => console.error(err));
+        .catch(err => {});
     }
   };
 
@@ -62,6 +121,17 @@ class App extends React.PureComponent {
       .then(hasPermission => {
         if (hasPermission) {
           this.subscribeToNotificationListeners();
+          firebase
+            .messaging()
+            .getToken()
+            .then(fcmToken => {
+              axios
+                .post("driver/update-fcm", {
+                  fcm: fcmToken
+                })
+                .then(res => {})
+                .catch(err => {});
+            });
         } else {
           firebase
             .messaging()
@@ -69,30 +139,14 @@ class App extends React.PureComponent {
             .then(() => {
               this.subscribeToNotificationListeners();
             })
-            .catch(error => {
-              console.error(error);
-            });
+            .catch(error => {});
         }
       });
-
-    LocationServicesDialogBox.checkLocationServicesIsEnabled({
-      message:
-        "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị để theo chính sách của công ty",
-      ok: "YES",
-      cancel: "NO",
-      enableHighAccuracy: true,
-      showDialog: true,
-      openLocationServices: true,
-      preventOutSideTouch: false,
-      preventBackClick: false,
-      providerListener: true
-    })
-      .then((success => {}).bind(this))
-      .catch(error => {});
   }
 
   componentWillUnmount() {
     this.notificationListener();
+    LocationServicesDialogBox.stopListener();
   }
 
   render() {

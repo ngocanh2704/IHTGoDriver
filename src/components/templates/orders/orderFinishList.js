@@ -1,23 +1,24 @@
 import React from "react";
 import { List, Content, Spinner } from "native-base";
-import { OrderItem } from "../organisms";
+import { OrderItem } from "../../organisms";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
-import { ButtonFilled as Button, TextNormal as Text } from "../atoms";
-import axios from "../../utilities/axios";
-import toast from "../../utilities/toast";
+import { ButtonFilled as Button, TextNormal as Text } from "../../atoms";
+import axios from "../../../utilities/axios";
+import toast from "../../../utilities/toast";
 import { withNavigation } from "react-navigation";
+import { connect } from "react-redux";
+import { SET_FINISH_ORDERS } from "../../../actions/types";
 
 const Container = styled(Content)`
   margin-left: 5px;
   margin-right: 5px;
 `;
 
-class OrderList extends React.PureComponent {
+class OrderFinishList extends React.PureComponent {
   state = {
     isLoading: true,
     isLoadMore: false,
-    orders: [],
     page: 1
   };
 
@@ -26,15 +27,18 @@ class OrderList extends React.PureComponent {
   }
 
   loadData = () => {
-    const type = this.props.type || 0;
     axios
       .post("driver/list-order", {
-        type,
+        type: 4,
         page: this.state.page
       })
       .then(res => {
+        this.props.dispatch({
+          type: SET_FINISH_ORDERS,
+          orders: res.data
+        });
+
         this.setState({
-          orders: this.state.orders.concat(res.data),
           isLoading: false,
           isLoadMore: false
         });
@@ -59,7 +63,7 @@ class OrderList extends React.PureComponent {
   };
 
   renderOrderList = () => {
-    return this.state.orders.map(item => {
+    return this.props.orders.map(item => {
       return (
         <TouchableOpacity
           key={item.id}
@@ -83,7 +87,7 @@ class OrderList extends React.PureComponent {
         <List>{this.renderOrderList()}</List>
         {this.state.isLoadMore ? (
           <Spinner color="red" />
-        ) : this.state.orders.length > 0 ? (
+        ) : this.props.orders.length > 0 ? (
           <Button text="Xem thêm" onPress={this.loadMore} />
         ) : (
           <Text>Không có đơn hàng</Text>
@@ -93,4 +97,6 @@ class OrderList extends React.PureComponent {
   }
 }
 
-export default withNavigation(OrderList);
+export default connect(state => ({
+  orders: state.order.finishOrders
+}))(withNavigation(OrderFinishList));

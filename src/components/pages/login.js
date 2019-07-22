@@ -55,7 +55,6 @@ class Login extends PureComponent {
   };
 
   submitLogin = () => {
-    // toast("Sai mật khẩu !");
     axios
       .post("login", {
         phone: "0946336663",
@@ -73,13 +72,9 @@ class Login extends PureComponent {
           this.props.navigation.navigate("MainScreen")
         );
       })
-      .catch(err => {});
-
-    // this.props.alert.alertWithType(
-    //   "error",
-    //   "có đơn hàng mới",
-    //   "#12345 cần ship gấp qua Mỹ"
-    // );
+      .catch(err => {
+        toast("Sai mật khẩu !");
+      });
   };
 
   render() {
@@ -120,8 +115,7 @@ class Login extends PureComponent {
 }
 
 export default connect(state => ({
-  username: state.login.username,
-  alert: state.alert.alert
+  username: state.login.username
 }))(Login);
 
 const styles = StyleSheet.create({

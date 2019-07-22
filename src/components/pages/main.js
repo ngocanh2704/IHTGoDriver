@@ -1,17 +1,34 @@
 import React, { PureComponent } from "react";
 import { BackHandler } from "react-native";
 import { Container, Tab, Tabs } from "native-base";
-import { OrderList, SideBar } from "../templates";
+import {
+  OrderList,
+  OrderFinishList,
+  OrderWaitingList,
+  SideBar
+} from "../templates";
 import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
 import { MainHeader as Header } from "../organisms";
 import { NavigationEvents } from "react-navigation";
 import { tracking } from "../../actions/tracking";
 import { connect } from "react-redux";
+import firebase from "react-native-firebase";
 
 class Main extends PureComponent {
   componentDidMount() {
     this.props.dispatch(tracking(navigator.geolocation));
+
+    // Create a RemoteMessage
+    const message = new firebase.messaging.RemoteMessage()
+      .setMessageId("unique id")
+      .setTo("163319977066@gcm.googleapis.com")
+      .setData({
+        key1: "value1",
+        key2: "value2"
+      });
+    // Send the message
+    firebase.messaging().sendMessage(message);
   }
 
   _onBlurr = () => {
@@ -60,7 +77,7 @@ class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <OrderList type={0} />
+              <OrderList />
             </Tab>
             <Tab
               heading={
@@ -69,7 +86,7 @@ class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <OrderList type={2} />
+              <OrderWaitingList />
             </Tab>
             <Tab
               heading={
@@ -78,7 +95,7 @@ class Main extends PureComponent {
                 </TabHeading>
               }
             >
-              <OrderList type={4} />
+              <OrderFinishList />
             </Tab>
           </Tabs>
         </Container>
