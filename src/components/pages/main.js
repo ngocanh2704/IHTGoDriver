@@ -9,26 +9,25 @@ import {
 } from "../templates";
 import { Drawer } from "native-base";
 import { TextTitle as Text, TabHeading } from "../atoms";
-import { MainHeader as Header } from "../organisms";
+import { MainHeader as Header, FabRefresh } from "../organisms";
 import { NavigationEvents } from "react-navigation";
 import { tracking } from "../../actions/tracking";
 import { connect } from "react-redux";
 import firebase from "react-native-firebase";
+import axios from "../../utilities/axios";
 
 class Main extends PureComponent {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.dispatch(tracking(navigator.geolocation));
-
-    // Create a RemoteMessage
-    const message = new firebase.messaging.RemoteMessage()
-      .setMessageId("unique id")
-      .setTo("163319977066@gcm.googleapis.com")
-      .setData({
-        key1: "value1",
-        key2: "value2"
-      });
-    // Send the message
-    firebase.messaging().sendMessage(message);
+    const fcmToken = await firebase.messaging().getToken();
+    if (fcmToken) {
+      axios
+        .post("driver/update-fcm", {
+          fcm: fcmToken
+        })
+        .then(res => {})
+        .catch(err => {});
+    }
   }
 
   _onBlurr = () => {
@@ -66,10 +65,7 @@ class Main extends PureComponent {
             onWillBlur={this._onBlurr}
           />
           <Header openDrawer={this.openDrawer} />
-          <Tabs
-            locked={true}
-            tabBarUnderlineStyle={{ backgroundColor: "white" }}
-          >
+          <Tabs tabBarUnderlineStyle={{ backgroundColor: "white" }}>
             <Tab
               heading={
                 <TabHeading style={{ backgroundColor: "#c62828" }}>
@@ -78,6 +74,7 @@ class Main extends PureComponent {
               }
             >
               <OrderList />
+              <FabRefresh type={1} />
             </Tab>
             <Tab
               heading={
@@ -87,6 +84,7 @@ class Main extends PureComponent {
               }
             >
               <OrderWaitingList />
+              <FabRefresh type={2} />
             </Tab>
             <Tab
               heading={
@@ -96,6 +94,7 @@ class Main extends PureComponent {
               }
             >
               <OrderFinishList />
+              <FabRefresh type={3} />
             </Tab>
           </Tabs>
         </Container>

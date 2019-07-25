@@ -3,31 +3,22 @@ import ActionButton from "react-native-action-button";
 import { Icon } from "../atoms";
 import { Linking } from "react-native";
 import { connect } from "react-redux";
-import { SET_ORDER_BOOKMARK, REMOVE_ORDER_BOOKMARK } from "../../actions/types";
 import axios from "../../utilities/axios";
+import { startShipping, finishShipping } from "../../actions/shipping";
 
 class Fab extends PureComponent {
-  startShipping = () => {
+  _startShipping = () => {
+    const { id } = this.props;
     axios
-      .get("driver/order-start/" + this.props.id)
-      .then(res => {
-        this.props.dispatch({
-          type: SET_ORDER_BOOKMARK,
-          id: this.props.id
-        });
-      })
+      .get("driver/order-start/" + id)
+      .then(res => this.props.dispatch(startShipping(id)))
       .catch(err => {});
   };
 
-  finishShipping = () => {
+  _finishShipping = () => {
     axios
       .get("driver/order-finish/" + this.props.id)
-      .then(res => {
-        this.props.dispatch({
-          type: REMOVE_ORDER_BOOKMARK,
-          id: this.props.id
-        });
-      })
+      .then(res => this.props.dispatch(finishShipping(this.props.id)))
       .catch(err => {});
   };
 
@@ -51,7 +42,7 @@ class Fab extends PureComponent {
         {current_status == 2 && (
           <ActionButton.Item
             title="Bắt đầu giao hàng"
-            onPress={this.startShipping}
+            onPress={this._startShipping}
           >
             <Icon name="md-bicycle" />
           </ActionButton.Item>
@@ -59,7 +50,7 @@ class Fab extends PureComponent {
         {current_status == 3 && (
           <ActionButton.Item
             title="Hoàn thành đơn hàng"
-            onPress={this.finishShipping}
+            onPress={this._finishShipping}
           >
             <Icon name="md-bicycle" />
           </ActionButton.Item>

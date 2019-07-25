@@ -1,22 +1,27 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { Content, Body, Card, CardItem, Spinner } from "native-base";
-import { TextNormal as Text, TextOrder, DarkIcon as Icon } from "../atoms";
+import {
+  TextNormal as Text,
+  TextOrder,
+  DarkIcon as Icon,
+  TextHightlight
+} from "../atoms";
 import { withNavigation } from "react-navigation";
 import axios from "../../utilities/axios";
 import toast from "../../utilities/toast";
 import { connect } from "react-redux";
 import { SET_CURRENT_ORDER } from "../../actions/types";
 import { toCurrency } from "../../utilities/regex";
+import { formatDate } from "../../utilities/formatDate";
 
-class ItemDetail extends PureComponent {
+class ItemDetail extends Component {
   state = {
     isLoading: true,
     order: []
   };
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    const id = navigation.getParam("id", 0);
+  loadData = () => {
+    const { id } = this.props;
     axios
       .get("driver/order-detail/" + id)
       .then(res => {
@@ -39,6 +44,16 @@ class ItemDetail extends PureComponent {
         });
         toast("Lỗi không lấy được dữ liệu đơn hàng");
       });
+  };
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.loadData();
+    }
   }
 
   render() {
@@ -61,7 +76,11 @@ class ItemDetail extends PureComponent {
       is_speed,
       take_money,
       admin_note,
-      payment_type
+      payment_type,
+      sender_district_id,
+      sender_province_id,
+      receive_district_id,
+      receive_province_id
     } = this.state.order;
 
     return this.state.isLoading ? (
@@ -74,16 +93,18 @@ class ItemDetail extends PureComponent {
           </CardItem>
           <CardItem>
             <Body>
-              <Text>Mã đơn hàng: {code}</Text>
-              <Text>Ngày tạo: {created_at}</Text>
-              <Text>Loại đơn hàng: {this.props.orderType[car_option]}</Text>
-              {payment_type === 1 && (
-                <Text>Phí vận chuyển: {toCurrency(total_price)} VND</Text>
-              )}
-              {take_money !== 0 ||
-                (take_money !== "0" && (
-                  <Text>Thu hộ: {toCurrency(take_money)} VND</Text>
-                ))}
+              <TextHightlight text={code} />
+              <TextHightlight
+                prefix={"Phí vận chuyển: "}
+                text={toCurrency(total_price ? total_price : 0) + " VNĐ"}
+              />
+              <TextHightlight
+                prefix={"Thu hộ: "}
+                text={toCurrency(take_money ? take_money : 0) + " VNĐ"}
+              />
+              <Text>Ngày tạo: {formatDate(created_at)}</Text>
+              <Text>{this.props.orderType[car_option]}</Text>
+
               <Text>Trạng thái: {this.props.orderStatus[status]}</Text>
               <Text>Cân nặng: {weight} kg</Text>
               <Text>Giao hỏa tốc: {is_speed === 0 ? "KHÔNG" : "CÓ"}</Text>
@@ -107,7 +128,14 @@ class ItemDetail extends PureComponent {
           <CardItem>
             <Body>
               <Text>Họ tên: {sender_name}</Text>
-              <Text>Địa chỉ: {sender_address}</Text>
+              <Text>
+                Địa chỉ:
+                {sender_address +
+                  " " +
+                  sender_district_id +
+                  " " +
+                  sender_province_id}
+              </Text>
               <Text>Điện thoại: {sender_phone}</Text>
             </Body>
           </CardItem>
@@ -121,8 +149,15 @@ class ItemDetail extends PureComponent {
           <CardItem>
             <Body>
               <Text>Họ tên: {receive_name}</Text>
-              <Text>Địa chỉ: {receive_phone}</Text>
-              <Text>Điện thoại: {receive_address}</Text>
+              <Text>
+                Địa chỉ:
+                {receive_address +
+                  " " +
+                  receive_district_id +
+                  " " +
+                  receive_province_id}
+              </Text>
+              <Text>Điện thoại: {receive_phone} </Text>
             </Body>
           </CardItem>
         </Card>

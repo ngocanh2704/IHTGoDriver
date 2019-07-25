@@ -7,6 +7,7 @@ import {
   DarkIcon as Icon
 } from "../atoms";
 import { connect } from "react-redux";
+import axios from "../../utilities/axios";
 
 const Form = styled(View)`
   margin: 20px;
@@ -31,7 +32,10 @@ class ChangePassword extends React.PureComponent {
     else if (this.state.new_pwd !== this.state.renew_pwd)
       msg = "Mật khẩu xác nhận không trùng khớp";
 
-    msg && this.props.alert.alertWithType("error", "Lỗi", msg);
+    if (msg) {
+      this.props.alert.alertWithType("error", "Lỗi", msg);
+      return;
+    }
 
     axios
       .post("driver/change-passwd", {

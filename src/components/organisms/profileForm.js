@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { emailValidate } from "../../utilities/regex";
 import axios from "../../utilities/axios";
+import { SET_USER_INFO } from "../../actions/types";
 
 const Form = styled(View)`
   margin: 20px;
@@ -62,6 +63,13 @@ class ProFileForm extends React.PureComponent {
           "Thành công",
           "Đổi thông tin cá nhân thành công"
         );
+        this.props.dispatch({
+          type: SET_USER_INFO,
+          id: this.props.id,
+          name,
+          phone,
+          email
+        });
       })
       .catch(err => {
         this.props.alert.alertWithType("error", "Lỗi", "Lỗi hệ thống");

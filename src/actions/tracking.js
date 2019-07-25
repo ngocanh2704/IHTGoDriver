@@ -2,6 +2,7 @@ import { SET_LOCATION } from "./types";
 import axios from "../utilities/axios";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import Geolocation from "@react-native-community/geolocation";
+import toast from "../utilities/toast";
 
 export const tracking = () => {
   return async (dispatch, getState) => {
@@ -26,17 +27,18 @@ export const tracking = () => {
                   lng
                 });
               })
-              .catch(err => {});
+              .catch(err => {
+                toast(err);
+              });
           }
         },
         error => {
-          console.log(error.code, error.message);
           LocationServicesDialogBox.checkLocationServicesIsEnabled({
             message:
-              "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị để theo chính sách của công ty",
-            ok: "YES",
-            cancel: "NO",
-            enableHighAccuracy: true,
+              "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị",
+            ok: "Có",
+            cancel: "Không",
+            enableHighAccuracy: false,
             showDialog: true,
             openLocationServices: true,
             preventOutSideTouch: false,
@@ -46,7 +48,7 @@ export const tracking = () => {
             .then((success => {}).bind(this))
             .catch(error => {});
         },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        { enableHighAccuracy: false, timeout: 15000, maximumAge: 10000 }
       );
     }, 5000);
   };

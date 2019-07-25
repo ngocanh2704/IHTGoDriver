@@ -57,8 +57,10 @@ class Login extends PureComponent {
   submitLogin = () => {
     axios
       .post("login", {
-        phone: "0946336663",
-        password: "111111"
+        // phone: "0946336663",
+        // password: "111111"
+        phone: this.props.username,
+        password: this.props.password
       })
       .then(res => {
         this.props.dispatch({
@@ -115,7 +117,8 @@ class Login extends PureComponent {
 }
 
 export default connect(state => ({
-  username: state.login.username
+  username: state.login.username,
+  password: state.login.password
 }))(Login);
 
 const styles = StyleSheet.create({

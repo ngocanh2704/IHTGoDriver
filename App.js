@@ -10,7 +10,8 @@ import DropdownAlert from "react-native-dropdownalert";
 import {
   SET_ALERT,
   ADD_ALL_ORDER,
-  ADD_WAITING_ORDER
+  ADD_WAITING_ORDER,
+  REMOVE_ORDER
 } from "./src/actions/types";
 import axios from "./src/utilities/axios";
 import localNotification from "./src/utilities/localNotification";
@@ -23,12 +24,9 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.checkIsLocation().catch(error => error);
-
     DeviceEventEmitter.addListener("locationProviderStatusChange", function(
       status
-    ) {
-      console.log(status);
-    });
+    ) {});
   }
 
   async checkIsLocation() {
@@ -60,19 +58,30 @@ class App extends React.PureComponent {
     this.notificationListener = firebase
       .notifications()
       .onNotification(notification => {
-        this.comingOrder(notification.data.order_id);
-        //display if foreground
-        this.displayNotification(notification);
-        //display if online
-        store
-          .getState()
-          .alert.alert.alertWithType(
-            "error",
-            notification.title,
-            notification.body
-          );
+        if (notification.data.action == 1) {
+          this.deleteOrder(notification.data.order_id);
+        } else {
+          this.comingOrder(notification.data.order_id);
+          //display if foreground
+          this.displayNotification(notification);
+          //display if online
+          store
+            .getState()
+            .alert.alert.alertWithType(
+              "error",
+              notification.title,
+              notification.body
+            );
+        }
       });
   }
+
+  deleteOrder = order_id => {
+    store.dispatch({
+      type: REMOVE_ORDER,
+      id: order_id
+    });
+  };
 
   comingOrder = order_id => {
     axios
@@ -121,17 +130,17 @@ class App extends React.PureComponent {
       .then(hasPermission => {
         if (hasPermission) {
           this.subscribeToNotificationListeners();
-          firebase
-            .messaging()
-            .getToken()
-            .then(fcmToken => {
-              axios
-                .post("driver/update-fcm", {
-                  fcm: fcmToken
-                })
-                .then(res => {})
-                .catch(err => {});
-            });
+          // firebase
+          //   .messaging()
+          //   .getToken()
+          //   .then(fcmToken => {
+          //     axios
+          //       .post("driver/update-fcm", {
+          //         fcm: fcmToken
+          //       })
+          //       .then(res => {})
+          //       .catch(err => {});
+          //   });
         } else {
           firebase
             .messaging()

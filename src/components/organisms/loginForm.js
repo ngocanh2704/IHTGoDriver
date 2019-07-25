@@ -28,7 +28,7 @@ export default props => (
       <Input
         placeholder="mật khẩu"
         value={props.password}
-        onChange={props.setPassword}
+        onChangeText={props.setPassword}
         secureTextEntry={true}
       />
     </Item>

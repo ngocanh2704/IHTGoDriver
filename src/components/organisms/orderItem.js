@@ -9,9 +9,9 @@ import {
   DarkIcon
 } from "../atoms";
 import { connect } from "react-redux";
-import { toCurrency } from "../../utilities/regex";
+import { formatDate } from "../../utilities/formatDate";
 
-class ItemComponent extends PureComponent {
+class OrderItem extends PureComponent {
   state = {
     order: []
   };
@@ -35,18 +35,29 @@ class ItemComponent extends PureComponent {
 
   formatString(str) {
     if (str) {
-      let newStr = str.slice(0, 35);
-      newStr += str.length > 35 ? "..." : "";
+      let newStr = str.slice(0, 30);
+      newStr += str.length > 30 ? "..." : "";
       return newStr;
     }
     return null;
   }
-  render() {
-    if (this.state.order.name) {
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.item.status !== this.props.item.status ||
+      prevProps.item.name !== this.props.item.name ||
+      prevProps.item.created_at !== this.props.item.created_at
+    ) {
+      this.setState({
+        order: this.props.item
+      });
     }
+  }
+
+  render() {
     return (
       <Card>
-        <CardItem style={{ height: 50, paddingLeft: -10 }}>
+        <CardItem style={{ height: 50, paddingLeft: -10 }} bordered>
           <TextOrder>
             {this.state.order.is_speed ? (
               <DarkIcon type="AntDesign" name="rocket1" />
@@ -57,15 +68,8 @@ class ItemComponent extends PureComponent {
         </CardItem>
         <CardItem>
           <Body>
-            <Text>
-              Tổng tiền:
-              {toCurrency(this.state.order.total_price)}
-              VNĐ
-            </Text>
-            <Text>
-              Loại: {this.props.orderType[this.state.order.car_option]}
-            </Text>
-            <Text>Ngày: {this.state.order.created_at}</Text>
+            <Text>{this.props.orderType[this.state.order.car_option]}</Text>
+            <Text>Ngày {formatDate(this.state.order.created_at)}</Text>
           </Body>
         </CardItem>
       </Card>
@@ -75,4 +79,4 @@ class ItemComponent extends PureComponent {
 
 export default connect(state => ({
   orderType: state.constant.orderType
-}))(ItemComponent);
+}))(OrderItem);

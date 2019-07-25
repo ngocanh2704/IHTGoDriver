@@ -7,7 +7,7 @@ import {
   Image
 } from "react-native";
 import { Row, Col } from "native-base";
-import { DarkIcon, Icon, TextMenu as Text } from "../atoms";
+import { DarkIcon, Icon, TextNormal as Text } from "../atoms";
 import { connect } from "react-redux";
 import axios from "../../utilities/axios";
 import AsyncStorage from "@react-native-community/async-storage";

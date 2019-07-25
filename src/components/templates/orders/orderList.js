@@ -18,8 +18,7 @@ const Container = styled(Content)`
 class OrderList extends React.PureComponent {
   state = {
     isLoading: true,
-    isLoadMore: false,
-    page: 1
+    isLoadMore: false
   };
 
   componentDidMount() {
@@ -30,18 +29,21 @@ class OrderList extends React.PureComponent {
     axios
       .post("driver/list-order", {
         type: 0,
-        page: this.state.page
+        page: this.props.orders.length
       })
       .then(res => {
-        this.props.dispatch({
-          type: SET_ALL_ORDERS,
-          orders: res.data
-        });
-
-        this.setState({
-          isLoading: false,
-          isLoadMore: false
-        });
+        this.setState(
+          {
+            isLoading: false,
+            isLoadMore: false
+          },
+          () => {
+            this.props.dispatch({
+              type: SET_ALL_ORDERS,
+              orders: res.data
+            });
+          }
+        );
       })
       .catch(err => {
         this.setState({
@@ -55,7 +57,6 @@ class OrderList extends React.PureComponent {
   loadMore = () => {
     this.setState(
       {
-        page: this.state.page + 1,
         isLoadMore: true
       },
       () => this.loadData()

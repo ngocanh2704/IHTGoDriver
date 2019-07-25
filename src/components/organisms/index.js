@@ -5,3 +5,4 @@ export { default as OrderItem } from "./orderItem";
 export { default as MenuHeader } from "./menuHeader";
 export { default as ProfileForm } from "./profileForm";
 export { default as Fab } from "./fab";
+export { default as FabRefresh } from "./fabRefresh";
