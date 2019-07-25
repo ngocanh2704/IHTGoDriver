@@ -21,3 +21,4 @@ export const ADD_FINISH_ORDER = "add_finish_order";
 export const START_SHIPPING = "start_shipping";
 export const FINISH_SHIPPING = "finish_shipping";
 export const REMOVE_ORDER = "remove_order";
+export const RESET_ORDERS = "reset_orders";

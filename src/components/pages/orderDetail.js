@@ -47,24 +47,32 @@ class DetailComponent extends PureComponent {
     }
   };
 
+  backToPrev = () => {
+    const nextOrder = this.nextOrder(this.state.id);
+    if (nextOrder) {
+      this.setState({
+        id: nextOrder.id
+      });
+    }
+  };
+
+  jumpToNext = () => {
+    const prevOrder = this.prevOrder(this.state.id);
+    if (prevOrder) {
+      this.setState({
+        id: prevOrder.id
+      });
+    }
+  };
+
   onSwipePerformed = action => {
     switch (action) {
       case "left": {
-        const nextOrder = this.nextOrder(this.state.id);
-        if (nextOrder) {
-          this.setState({
-            id: nextOrder.id
-          });
-        }
+        this.backToPrev();
         break;
       }
       case "right": {
-        const prevOrder = this.prevOrder(this.state.id);
-        if (prevOrder) {
-          this.setState({
-            id: prevOrder.id
-          });
-        }
+        this.jumpToNext();
         break;
       }
       default: {
@@ -80,6 +88,9 @@ class DetailComponent extends PureComponent {
         <Header
           back={() => this.props.navigation.goBack()}
           title="Thông tin đơn hàng"
+          paging
+          prev={this.backToPrev}
+          next={this.jumpToNext}
         />
         {this.state.isLoading ? (
           <Spinner color="red" />

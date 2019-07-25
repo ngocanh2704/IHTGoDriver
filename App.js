@@ -130,17 +130,6 @@ class App extends React.PureComponent {
       .then(hasPermission => {
         if (hasPermission) {
           this.subscribeToNotificationListeners();
-          // firebase
-          //   .messaging()
-          //   .getToken()
-          //   .then(fcmToken => {
-          //     axios
-          //       .post("driver/update-fcm", {
-          //         fcm: fcmToken
-          //       })
-          //       .then(res => {})
-          //       .catch(err => {});
-          //   });
         } else {
           firebase
             .messaging()

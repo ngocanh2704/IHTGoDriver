@@ -10,7 +10,8 @@ import {
   REMOVE_ORDER,
   RESET_ALL_ORDERS,
   RESET_FINISH_ORDERS,
-  RESET_WAITING_ORDERS
+  RESET_WAITING_ORDERS,
+  RESET_ORDERS
 } from "../actions/types";
 
 const initialState = {
@@ -21,6 +22,10 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case RESET_ORDERS:
+      return {
+        ...initialState
+      };
     case SET_ALL_ORDERS:
       return { ...state, allOrders: [...state.allOrders, ...action.orders] };
     case SET_WAITING_ORDERS:

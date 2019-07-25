@@ -1,4 +1,5 @@
 export const formatDate = date => {
+  return date;
   if (date) {
     date = date.split("-");
     var monthNames = [
