@@ -33,6 +33,7 @@ export const tracking = () => {
           }
         },
         error => {
+          toast("Không thể lấy vị trí, vui lòng bật định vị");
           LocationServicesDialogBox.checkLocationServicesIsEnabled({
             message:
               "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị",

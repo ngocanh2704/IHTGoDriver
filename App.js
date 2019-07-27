@@ -24,22 +24,25 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.checkIsLocation().catch(error => error);
+
     DeviceEventEmitter.addListener("locationProviderStatusChange", function(
       status
-    ) {});
+    ) {
+      console.log(status);
+    });
   }
 
   async checkIsLocation() {
     let check = await LocationServicesDialogBox.checkLocationServicesIsEnabled({
-      message: "Use Location ?",
+      message: "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị",
       ok: "YES",
       cancel: "NO",
-      enableHighAccuracy: true, // true => GPS AND NETWORK PROVIDER, false => GPS OR NETWORK PROVIDER
-      showDialog: true, // false => Opens the Location access page directly
-      openLocationServices: true, // false => Directly catch method is called if location services are turned off
-      preventOutSideTouch: false, //true => To prevent the location services window from closing when it is clicked outside
-      preventBackClick: false, //true => To prevent the location services popup from closing when it is clicked back button
-      providerListener: true // true ==> Trigger "locationProviderStatusChange" listener when the location state changes
+      enableHighAccuracy: false,
+      showDialog: true,
+      openLocationServices: true,
+      preventOutSideTouch: false,
+      preventBackClick: false,
+      providerListener: true
     }).catch(error => error);
 
     return Object.is(check.status, "enabled");

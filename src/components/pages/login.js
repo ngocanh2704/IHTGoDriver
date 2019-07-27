@@ -91,35 +91,30 @@ class Login extends PureComponent {
     return this.state.isLoading ? (
       <Spinner color="red" />
     ) : (
-      <ImageBackground
-        source={require("../../../assest/1.jpg")}
-        style={styles.imageBackGround}
-      >
-        <View style={styles.content}>
-          <Image
-            style={styles.logo}
-            source={require("../../../assest/logo.png")}
-          />
-          <Text
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#e50304"
-            }}
-          >
-            EXPRESS SERVICES
-          </Text>
-          <LoginForm
-            username={this.props.username}
-            password={this.props.password}
-            setUsername={this.handleChangeUsername}
-            setPassword={this.handleChangePassword}
-            login={this.submitLogin}
-          />
-        </View>
-      </ImageBackground>
+      <View style={styles.content}>
+        <Image
+          style={styles.logo}
+          source={require("../../../assest/logo.png")}
+        />
+        {/* <Text
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "#e50304"
+          }}
+        >
+          EXPRESS SERVICES
+        </Text> */}
+        <LoginForm
+          username={this.props.username}
+          password={this.props.password}
+          setUsername={this.handleChangeUsername}
+          setPassword={this.handleChangePassword}
+          login={this.submitLogin}
+        />
+      </View>
     );
   }
 }
