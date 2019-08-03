@@ -86,7 +86,7 @@ class ItemDetail extends Component {
     return this.state.isLoading ? (
       <Spinner color="red" />
     ) : (
-      <Content style={{ padding: 5 }}>
+      <Content style={{ padding: 5, marginBottom: 100 }}>
         <Card>
           <CardItem bordered>
             <TextOrder>{name}</TextOrder>

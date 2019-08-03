@@ -21,31 +21,36 @@ class Login extends PureComponent {
     super(props);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.dispatch({
       type: RESET_ORDERS
     });
     // localNotify();
-    await axios
+    axios
       .get("driver/verify")
       .then(res => {
-        this.props.dispatch({
-          type: SET_USER_INFO,
-          id: res.data.user.id,
-          name: res.data.user.name,
-          phone: res.data.user.phone,
-          email: res.data.user.email
-        });
+        if (res.data) {
+          this.props.dispatch({
+            type: SET_USER_INFO,
+            id: res.data.id,
+            name: res.data.name,
+            phone: res.data.phone,
+            email: res.data.email
+          });
+        }
 
         AsyncStorage.setItem("@token", res.data.token).then(() =>
           this.props.navigation.navigate("MainScreen")
         );
+        this.setState({
+          isLoading: false
+        });
       })
-      .catch(err => {});
-
-    this.setState({
-      isLoading: false
-    });
+      .catch(err => {
+        this.setState({
+          isLoading: false
+        });
+      });
   }
 
   handleChangeUsername = event => {
@@ -65,8 +70,6 @@ class Login extends PureComponent {
   submitLogin = () => {
     axios
       .post("login", {
-        // phone: "0946336663",
-        // password: "111111"
         phone: this.props.username,
         password: this.props.password
       })
@@ -83,6 +86,7 @@ class Login extends PureComponent {
         );
       })
       .catch(err => {
+        console.log(err);
         toast("Sai mật khẩu !");
       });
   };
@@ -96,17 +100,6 @@ class Login extends PureComponent {
           style={styles.logo}
           source={require("../../../assest/logo.png")}
         />
-        {/* <Text
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            fontSize: 20,
-            fontWeight: "bold",
-            color: "#e50304"
-          }}
-        >
-          EXPRESS SERVICES
-        </Text> */}
         <LoginForm
           username={this.props.username}
           password={this.props.password}
@@ -130,8 +123,8 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   logo: {
-    height: 100,
-    width: 145,
+    height: 150,
+    width: 230,
     marginLeft: "auto",
     marginRight: "auto"
   },

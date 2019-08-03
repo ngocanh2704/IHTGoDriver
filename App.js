@@ -16,67 +16,10 @@ import {
 import axios from "./src/utilities/axios";
 import localNotification from "./src/utilities/localNotification";
 import { DeviceEventEmitter } from "react-native";
-import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
-
-navigator.geolocation = require("@react-native-community/geolocation");
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.checkIsLocation().catch(error => error);
-
-    DeviceEventEmitter.addListener("locationProviderStatusChange", function(
-      status
-    ) {
-      console.log(status);
-    });
-  }
-
-  async checkIsLocation() {
-    let check = await LocationServicesDialogBox.checkLocationServicesIsEnabled({
-      message: "<h2>Vui lòng bật định vị !</h2>Phần mềm bắt buộc bật định vị",
-      ok: "YES",
-      cancel: "NO",
-      enableHighAccuracy: false,
-      showDialog: true,
-      openLocationServices: true,
-      preventOutSideTouch: false,
-      preventBackClick: false,
-      providerListener: true
-    }).catch(error => error);
-
-    return Object.is(check.status, "enabled");
-  }
-
-  subscribeToNotificationListeners() {
-    const channel = new firebase.notifications.Android.Channel(
-      "notification_channel_name",
-      "Notifications",
-      firebase.notifications.Android.Importance.Max
-    ).setDescription(
-      "A Channel To manage the notifications related to Application"
-    );
-    firebase.notifications().android.createChannel(channel);
-
-    this.notificationListener = firebase
-      .notifications()
-      .onNotification(notification => {
-        if (notification.data.action == 1) {
-          this.deleteOrder(notification.data.order_id);
-        } else {
-          this.comingOrder(notification.data.order_id);
-          //display if foreground
-          this.displayNotification(notification);
-          //display if online
-          store
-            .getState()
-            .alert.alert.alertWithType(
-              "error",
-              notification.title,
-              notification.body
-            );
-        }
-      });
   }
 
   deleteOrder = order_id => {
@@ -103,6 +46,35 @@ class App extends React.PureComponent {
       })
       .catch(err => {});
   };
+
+  subscribeToNotificationListeners() {
+    const channel = new firebase.notifications.Android.Channel(
+      "notification_channel_name",
+      "Notifications",
+      firebase.notifications.Android.Importance.Max
+    ).setDescription(
+      "A Channel To manage the notifications related to Application"
+    );
+    firebase.notifications().android.createChannel(channel);
+
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification(notification => {
+        if (parseInt(notification.data.action) === 1) {
+          this.deleteOrder(notification.data.order_id);
+        } else {
+          this.comingOrder(notification.data.order_id);
+        }
+        this.displayNotification(notification);
+        store
+          .getState()
+          .alert.alert.alertWithType(
+            "error",
+            notification.title,
+            notification.body
+          );
+      });
+  }
 
   displayNotification = notification => {
     if (Platform.OS === "android") {
@@ -143,11 +115,6 @@ class App extends React.PureComponent {
             .catch(error => {});
         }
       });
-  }
-
-  componentWillUnmount() {
-    this.notificationListener();
-    LocationServicesDialogBox.stopListener();
   }
 
   render() {

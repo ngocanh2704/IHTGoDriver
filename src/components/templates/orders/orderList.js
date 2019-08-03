@@ -32,6 +32,7 @@ class OrderList extends React.PureComponent {
         page: this.props.orders.length
       })
       .then(res => {
+        // console.log("list-order ok");
         this.setState(
           {
             isLoading: false,

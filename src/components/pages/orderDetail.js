@@ -76,7 +76,7 @@ class DetailComponent extends PureComponent {
         break;
       }
       default: {
-        console.log("Undeteceted action");
+        // console.log("Undeteceted action");
         break;
       }
     }

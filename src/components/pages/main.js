@@ -25,8 +25,12 @@ class Main extends PureComponent {
         .post("driver/update-fcm", {
           fcm: fcmToken
         })
-        .then(res => {})
-        .catch(err => {});
+        .then(res => {
+          // console.log("update fcm ok", fcmToken);
+        })
+        .catch(err => {
+          // console.log("update fcm fail", err);
+        });
     }
   }
 
