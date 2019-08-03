@@ -81,6 +81,8 @@
 		36FC67311F0E4FC3AFD1DCF8 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD0AB415F20489CAE528ABE /* SimpleLineIcons.ttf */; };
 		B13805D30C94440C89C853B5 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81EDA59A446B47A9B0C1B0EB /* Zocial.ttf */; };
 		81E9BA09DFE44849B68AC253 /* libRNCGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF75E3DF68084D8FB3FF1849 /* libRNCGeolocation.a */; };
+		239BCABD27444C7F901F8739 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E9E9331E934EC19F78F377 /* libRNDeviceInfo.a */; };
+		C1ADC888BAAD4F44BBBE2BC8 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B8A57D7D834A10BF409E93 /* libRNDeviceInfo-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,6 +438,9 @@
 		81EDA59A446B47A9B0C1B0EB /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		994891C2669249CF9C0CDCFB /* RNCGeolocation.xcodeproj */ = {isa = PBXFileReference; name = "RNCGeolocation.xcodeproj"; path = "../node_modules/@react-native-community/geolocation/ios/RNCGeolocation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		AF75E3DF68084D8FB3FF1849 /* libRNCGeolocation.a */ = {isa = PBXFileReference; name = "libRNCGeolocation.a"; path = "libRNCGeolocation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F6DCC2E5DEA74FE8BEF7B934 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		27E9E9331E934EC19F78F377 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E8B8A57D7D834A10BF409E93 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo-tvOS.a"; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +475,7 @@
 				6CAD8111DC13456CAA14A122 /* libRNCAsyncStorage.a in Frameworks */,
 				9EDEBC82FBB149498CAF78DD /* libRNInAppMessage.a in Frameworks */,
 				81E9BA09DFE44849B68AC253 /* libRNCGeolocation.a in Frameworks */,
+				239BCABD27444C7F901F8739 /* libRNDeviceInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +494,7 @@
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				75CDAA3A30AD4E49B19C67CD /* libRNGestureHandler-tvOS.a in Frameworks */,
 				9D9E93307DC044CCBEED7B2C /* libRNVectorIcons-tvOS.a in Frameworks */,
+				C1ADC888BAAD4F44BBBE2BC8 /* libRNDeviceInfo-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +674,7 @@
 				B198980D24414E19970DA272 /* RNCAsyncStorage.xcodeproj */,
 				29EEDBDF788C448A8FACA10F /* RNInAppMessage.xcodeproj */,
 				994891C2669249CF9C0CDCFB /* RNCGeolocation.xcodeproj */,
+				F6DCC2E5DEA74FE8BEF7B934 /* RNDeviceInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1372,6 +1380,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1381,6 +1391,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1403,6 +1414,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1412,6 +1425,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1440,6 +1454,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1467,6 +1482,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1497,6 +1513,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1506,6 +1524,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1536,6 +1555,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1545,6 +1566,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1574,6 +1596,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1583,6 +1607,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1612,6 +1637,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1621,6 +1648,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-in-app-message\src\RNInAppMessage\ios\RNInAppMessage/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\geolocation\ios",
+					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 				);
 			};
 			name = Release;

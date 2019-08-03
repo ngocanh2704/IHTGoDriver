@@ -13,6 +13,7 @@ import toast from "../../utilities/toast";
 import localNotify from "../../utilities/localNotification";
 import axios from "../../utilities/axios";
 import AsyncStorage from "@react-native-community/async-storage";
+import DeviceInfo from "react-native-device-info";
 
 class Login extends PureComponent {
   state = { isLoading: true };
@@ -35,7 +36,8 @@ class Login extends PureComponent {
             id: res.data.id,
             name: res.data.name,
             phone: res.data.phone,
-            email: res.data.email
+            email: res.data.email,
+            version: DeviceInfo.getVersion()
           });
         }
 
