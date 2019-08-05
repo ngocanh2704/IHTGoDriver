@@ -26,11 +26,9 @@ class Main extends PureComponent {
           fcm: fcmToken
         })
         .then(res => {
-          // console.log("update fcm ok", fcmToken);
+          console.log(fcmToken);
         })
-        .catch(err => {
-          // console.log("update fcm fail", err);
-        });
+        .catch(err => {});
     }
   }
 

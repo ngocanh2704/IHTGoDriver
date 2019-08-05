@@ -10,7 +10,8 @@ import { Row, Col } from "native-base";
 import { DarkIcon, Icon, TextNormal as Text } from "../atoms";
 import { connect } from "react-redux";
 import axios from "../../utilities/axios";
-import AsyncStorage from "@react-native-community/async-storage";
+import firebase from "react-native-firebase";
+import { RESET_ORDERS } from "../../actions/types";
 
 const responsiveFontSize = f => {
   return Math.sqrt(height * height + width * width) * (f / 100);
@@ -21,7 +22,11 @@ class SideBar extends PureComponent {
   logout = () => {
     axios
       .get("driver/logout")
-      .then(res => {
+      .then(async res => {
+        this.props.dispatch({
+          type: RESET_ORDERS
+        });
+        await firebase.messaging().deleteToken();
         this.props.navigator.navigate("LoginScreen");
       })
       .catch(err => {});

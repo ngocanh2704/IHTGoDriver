@@ -1,16 +1,10 @@
 import React, { PureComponent } from "react";
-import { View, Text, Spinner } from "native-base";
-import { ImageBackground, Image, StyleSheet } from "react-native";
+import { View, Spinner } from "native-base";
+import { Image, StyleSheet } from "react-native";
 import { LoginForm } from "../organisms";
 import { connect } from "react-redux";
-import {
-  SET_USERNAME,
-  SET_PASSWORD,
-  SET_USER_INFO,
-  RESET_ORDERS
-} from "../../actions/types";
+import { SET_USERNAME, SET_PASSWORD, SET_USER_INFO } from "../../actions/types";
 import toast from "../../utilities/toast";
-import localNotify from "../../utilities/localNotification";
 import axios from "../../utilities/axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import DeviceInfo from "react-native-device-info";
@@ -23,9 +17,6 @@ class Login extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: RESET_ORDERS
-    });
     // localNotify();
     axios
       .get("driver/verify")
@@ -88,7 +79,6 @@ class Login extends PureComponent {
         );
       })
       .catch(err => {
-        console.log(err);
         toast("Sai mật khẩu !");
       });
   };

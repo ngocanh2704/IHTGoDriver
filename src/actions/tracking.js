@@ -9,7 +9,6 @@ export const tracking = () => {
     setInterval(function() {
       Geolocation.getCurrentPosition(
         position => {
-          console.log(position);
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           if (
@@ -33,9 +32,7 @@ export const tracking = () => {
               });
           }
         },
-        error => {
-          console.log("Không thể lấy vị trí, vui lòng bật định vị", error);
-        },
+        error => {},
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
       );
       RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({

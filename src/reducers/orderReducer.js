@@ -24,7 +24,9 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case RESET_ORDERS:
       return {
-        ...initialState
+        allOrders: [],
+        waitingOrders: [],
+        finishOrders: []
       };
     case SET_ALL_ORDERS:
       return { ...state, allOrders: [...state.allOrders, ...action.orders] };

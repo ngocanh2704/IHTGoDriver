@@ -14,8 +14,6 @@ import {
   REMOVE_ORDER
 } from "./src/actions/types";
 import axios from "./src/utilities/axios";
-import localNotification from "./src/utilities/localNotification";
-import { DeviceEventEmitter } from "react-native";
 
 class App extends React.PureComponent {
   constructor(props) {
