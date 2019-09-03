@@ -1,4 +1,9 @@
-import { SET_LOCATION } from "./types";
+import {
+  SET_LOCATION,
+  SET_LOCATION_ERROR,
+  BLOCK_LOCATION,
+  UNBLOCK_LOCATION
+} from "./types";
 import axios from "../utilities/axios";
 import Geolocation from "@react-native-community/geolocation";
 import toast from "../utilities/toast";
@@ -9,6 +14,9 @@ export const tracking = () => {
     setInterval(function() {
       Geolocation.getCurrentPosition(
         position => {
+          dispatch({
+            type: UNBLOCK_LOCATION
+          });
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           if (
@@ -32,8 +40,13 @@ export const tracking = () => {
               });
           }
         },
-        error => {},
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        error => {
+          dispatch({
+            type: SET_LOCATION_ERROR,
+            error: error.message
+          });
+        },
+        { enableHighAccuracy: false, timeout: 15000, maximumAge: 10000 }
       );
       RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
         interval: 10000,

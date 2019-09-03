@@ -1,6 +1,7 @@
 export const SET_USERNAME = "set_username";
 export const SET_PASSWORD = "set_password";
 export const SET_LOCATION = "set_location";
+export const SET_LOCATION_ERROR = "set_location_error";
 export const SET_ALERT = "set_alert";
 export const SET_USER_INFO = "set_user_info";
 export const SET_NAME = "set_name";
@@ -22,3 +23,5 @@ export const START_SHIPPING = "start_shipping";
 export const FINISH_SHIPPING = "finish_shipping";
 export const REMOVE_ORDER = "remove_order";
 export const RESET_ORDERS = "reset_orders";
+export const BLOCK_LOCATION = "block_location";
+export const UNBLOCK_LOCATION = "unblock_location";

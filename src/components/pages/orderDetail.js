@@ -5,6 +5,7 @@ import { ItemDetail } from "../templates";
 import { MenuHeader as Header, Fab } from "../organisms";
 import SwipeGesture from "../../utilities/swipeHandler";
 import { connect } from "react-redux";
+import toast from "../../utilities/toast";
 
 class DetailComponent extends PureComponent {
   state = {
@@ -102,7 +103,7 @@ class DetailComponent extends PureComponent {
             >
               <ItemDetail id={this.state.id} />
             </SwipeGesture>
-            <Fab />
+            {this.props.block === false && <Fab />}
           </>
         )}
       </Container>
@@ -119,5 +120,6 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   orders: state.order.allOrders,
-  id: state.constant.id
+  id: state.constant.id,
+  block: state.location.block
 }))(DetailComponent);

@@ -2,8 +2,9 @@ import React, { PureComponent } from "react";
 import { Container, Content, Body, Card, CardItem } from "native-base";
 import { TextNormal as Text, TextOrder, DarkIcon as Icon } from "../atoms";
 import { MenuHeader as Header } from "../organisms";
+import { connect } from "react-redux";
 
-export default class AppInfo extends PureComponent {
+class AppInfo extends PureComponent {
   render() {
     return (
       <Container>
@@ -34,6 +35,10 @@ export default class AppInfo extends PureComponent {
                 <Text>Author: NAD</Text>
                 <Text>Copyrights by IHT GO, 2019</Text>
                 <Text>All right reserved</Text>
+                <Text>
+                  Location: {this.props.lat} - {this.props.lng}
+                  {this.props.error}
+                </Text>
               </Body>
             </CardItem>
           </Card>
@@ -42,3 +47,9 @@ export default class AppInfo extends PureComponent {
     );
   }
 }
+
+export default connect(state => ({
+  lat: state.location.lat,
+  lng: state.location.lng,
+  error: state.location.error
+}))(AppInfo);

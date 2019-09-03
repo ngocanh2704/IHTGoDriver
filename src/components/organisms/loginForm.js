@@ -2,7 +2,6 @@ import React from "react";
 import { View, Item } from "native-base";
 import styled from "styled-components";
 import {
-  Quote,
   InputNormal as Input,
   ButtonFilled as Button,
   DarkIcon as Icon
@@ -32,9 +31,6 @@ export default props => (
         secureTextEntry={true}
       />
     </Item>
-    {/* <Form>
-      <Quote>Quên mật khẩu?</Quote>
-    </Form> */}
     <View>
       <Button onPress={props.login} text="Đăng nhập" />
     </View>

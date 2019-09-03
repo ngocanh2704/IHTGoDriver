@@ -1,9 +1,16 @@
-import { SET_LOCATION } from "../actions/types";
+import {
+  SET_LOCATION,
+  SET_LOCATION_ERROR,
+  BLOCK_LOCATION,
+  UNBLOCK_LOCATION
+} from "../actions/types";
 
 const initialState = {
   lat: "",
   lng: "",
-  updateCounter: 0
+  updateCounter: 0,
+  error: "no error",
+  block: false
 };
 
 export default function(state = initialState, action) {
@@ -13,7 +20,23 @@ export default function(state = initialState, action) {
         ...state,
         lat: action.lat,
         lng: action.lng,
-        updateCounter: state.updateCounter + 1
+        updateCounter: state.updateCounter + 1,
+        error: ""
+      };
+    case SET_LOCATION_ERROR:
+      return {
+        ...state,
+        error: action.error
+      };
+    case BLOCK_LOCATION:
+      return {
+        ...state,
+        block: true
+      };
+    case UNBLOCK_LOCATION:
+      return {
+        ...state,
+        block: false
       };
     default:
       return state;

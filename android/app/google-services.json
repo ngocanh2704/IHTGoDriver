@@ -1,37 +1,27 @@
 {
   "project_info": {
-    "project_number": "163319977066",
-    "firebase_url": "https://ihtdriver-app.firebaseio.com",
-    "project_id": "ihtdriver-app",
-    "storage_bucket": "ihtdriver-app.appspot.com"
+    "project_number": "612108007368",
+    "firebase_url": "https://ihtgodriver.firebaseio.com",
+    "project_id": "ihtgodriver",
+    "storage_bucket": "ihtgodriver.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163319977066:android:2b3e1e4c85d2fc17",
+        "mobilesdk_app_id": "1:612108007368:android:2b3e1e4c85d2fc17",
         "android_client_info": {
           "package_name": "com.driverihtgo"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "163319977066-4ofkujoaekf892pdh134hmhi4i37t616.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDqdpID-MOc_AWv_PttGxMkFT_LnOzG5Z8"
+          "current_key": "AIzaSyB4GgbFN_OiZVOPf_mP2cq8F2Q0bJFQ6Dg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "163319977066-4ofkujoaekf892pdh134hmhi4i37t616.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
