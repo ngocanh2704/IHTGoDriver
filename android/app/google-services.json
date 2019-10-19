@@ -8,20 +8,81 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:612108007368:android:477eeed0f2429c451ef2fd",
+        "android_client_info": {
+          "package_name": "com.customeriht"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612108007368-ghljcr4jdlk8cju2s5vpgrn6063lm5bq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.customeriht",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "612108007368-joiopn9qiit54vjgbva46housm6n2ttb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGNO7p_t1oQH1cgVnW7i7ml8c3pGQPO3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612108007368-joiopn9qiit54vjgbva46housm6n2ttb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "612108007368-uetlpbdng2n9ur2n0m8drgpdbogifvq2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.CustomerIHT"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:612108007368:android:2b3e1e4c85d2fc17",
         "android_client_info": {
           "package_name": "com.driverihtgo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "612108007368-joiopn9qiit54vjgbva46housm6n2ttb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyB4GgbFN_OiZVOPf_mP2cq8F2Q0bJFQ6Dg"
+          "current_key": "AIzaSyDGNO7p_t1oQH1cgVnW7i7ml8c3pGQPO3w"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612108007368-joiopn9qiit54vjgbva46housm6n2ttb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "612108007368-uetlpbdng2n9ur2n0m8drgpdbogifvq2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.CustomerIHT"
+              }
+            }
+          ]
         }
       }
     }

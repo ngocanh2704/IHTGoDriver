@@ -15,6 +15,8 @@ import { tracking } from "../../actions/tracking";
 import { connect } from "react-redux";
 import firebase from "react-native-firebase";
 import axios from "../../utilities/axios";
+import FabQr from "../organisms/fabQr";
+import {request, PERMISSIONS} from 'react-native-permissions'
 
 class Main extends PureComponent {
   async componentDidMount() {
@@ -30,6 +32,7 @@ class Main extends PureComponent {
         })
         .catch(err => {});
     }
+      await request(PERMISSIONS.ANDROID.CAMERA)
   }
 
   _onBlurr = () => {
@@ -77,6 +80,7 @@ class Main extends PureComponent {
             >
               <OrderList />
               <FabRefresh type={1} />
+              <FabQr navigation={this.props.navigation}/>
             </Tab>
             <Tab
               heading={

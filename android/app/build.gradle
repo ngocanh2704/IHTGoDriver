@@ -107,6 +107,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 10
         versionName "1.8.0"
+        missingDimensionStrategy 'react-native-camera', 'general'
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
@@ -138,6 +140,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-image-crop-picker')
+    implementation project(':react-native-permissions')
+    implementation project(':react-native-camera')
     implementation project(':react-native-device-info')
     implementation project(':react-native-android-location-enabler')
     implementation project(':@react-native-community_geolocation')

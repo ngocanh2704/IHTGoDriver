@@ -1,6 +1,7 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { OrderList } from "./src/components/templates";
 import { Main, Login, Detail, Profile, AppInfo } from "./src/components/pages";
+import QrScan from "./src/components/pages/QrScan";
 
 const Screens = createStackNavigator({
   LoginScreen: {
@@ -37,6 +38,12 @@ const Screens = createStackNavigator({
   OrderDetailScreen: {
     screen: Detail,
     navigationOptions: {
+      header: null
+    }
+  },
+  QrScreen: {
+    screen: QrScan,
+    navigationOptions:{
       header: null
     }
   }
