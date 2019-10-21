@@ -16,6 +16,7 @@ export default class QrScan extends Component {
         axios.post('driver/qrcode-receive', {code: event.data}).then(res => {
             console.log(res)
             alert(res.data)
+            this.props.navigation.goBack()
         }).catch(err => console.log(err))
     };
     
@@ -23,6 +24,7 @@ export default class QrScan extends Component {
         axios.post('driver/qrcode-sender',{code: event.data}).then(res=>{
             console.log(res)
             alert(res.data)
+            this.props.navigation.goBack()
         }).catch(err=>console.log(err))
     }
 
