@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import axios from "../../utilities/axios";
 import { startShipping, finishShipping } from "../../actions/shipping";
 import ImagePicker from 'react-native-image-crop-picker';
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Platform } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage";
 import Axios from "axios";
 
@@ -27,7 +27,8 @@ class Fab extends PureComponent {
       height: 500,
       includeExif: true,
       mediaType,
-      includeBase64: true
+      includeBase64: true,
+      compressImageQuality: Platform.OS === 'android' ? 0.5 : 0.3
     }).then(image => {
       this.setState({
         image: `data:${image.mime};base64,`+ image.data,
