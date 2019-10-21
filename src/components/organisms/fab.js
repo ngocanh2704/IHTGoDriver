@@ -20,7 +20,7 @@ class Fab extends PureComponent {
   }
 
   pickSingleWithCamera = async (cropping, mediaType = 'photo') => {
-    var token =  await AsyncStorage.getItem("@token")
+    var token = await AsyncStorage.getItem("@token")
     ImagePicker.openCamera({
       cropping: cropping,
       width: 500,
@@ -29,19 +29,18 @@ class Fab extends PureComponent {
       mediaType,
       includeBase64: true
     }).then(image => {
-      console.log('received image', image);
       this.setState({
-        image: { uri: image.path, width: image.width, height: image.height, mime: image.mime },
+        image: `data:${image.mime};base64,`+ image.data,
         images: null
       });
       var formData = new FormData();
-      var file = { uri: image.path, width: image.width, height: image.height, mime: image.mime }
-      
+      var file = this.state.image
+      console.log(file)
       formData.append('id', this.props.id)
       formData.append('image', file)
       formData.append('token', token)
       Axios({
-        url: "https://ihtgo.com.vn/api/driver/upload-image",
+        url: "https://ihtgo.com.vn/api/driver/upload-image-base64",
         method: "POST",
         data: formData,
         headers: {
@@ -49,31 +48,20 @@ class Fab extends PureComponent {
           "Content-Type": "multipart/form-data",
           Authorization: "Bearer " + token
         }
-      }).then(res=>console.log(res))
-      .catch(err=>console.log(err))
+      }).then(res => {
+        this.cleanupImages()
+        this._finishShipping()
+      })
+        .catch(err => console.log(err))
     }).catch(e => alert(e));
   }
 
-  uploadFile = async () => {
-    var formData = new FormData();
-    formData.append('id', this.props.id)
-    formData.append('image', this.state.image)
-    axios.post('driver/upload-image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(res => console.log(res)).catch(err => console.log(err))
-  }
-
-  cleanupSingleImage() {
-    let image = this.state.image || (this.state.images && this.state.images.length ? this.state.images[0] : null);
-    console.log('will cleanup image', image);
-
-    ImagePicker.cleanSingle(image ? image.uri : null).then(() => {
-      console.log(`removed tmp image ${image.uri} from tmp directory`);
+  cleanupImages() {
+    ImagePicker.clean().then(() => {
+      console.log('removed tmp images from tmp directory');
     }).catch(e => {
       alert(e);
-    })
+    });
   }
 
   _startShipping = () => {
