@@ -16,9 +16,10 @@ import { connect } from "react-redux";
 import firebase from "react-native-firebase";
 import axios from "../../utilities/axios";
 import FabQr from "../organisms/fabQr";
-import {request, PERMISSIONS} from 'react-native-permissions'
+import { request, PERMISSIONS } from 'react-native-permissions'
 
 class Main extends PureComponent {
+
   async componentDidMount() {
     this.props.dispatch(tracking(navigator.geolocation));
     const fcmToken = await firebase.messaging().getToken();
@@ -30,9 +31,9 @@ class Main extends PureComponent {
         .then(res => {
           console.log(fcmToken);
         })
-        .catch(err => {});
+        .catch(err => { });
     }
-      await request(PERMISSIONS.ANDROID.CAMERA)
+    await request(PERMISSIONS.ANDROID.CAMERA)
   }
 
   _onBlurr = () => {
@@ -80,7 +81,7 @@ class Main extends PureComponent {
             >
               <OrderList />
               <FabRefresh type={1} />
-              <FabQr navigation={this.props.navigation}/>
+              <FabQr navigation={this.props.navigation} />
             </Tab>
             <Tab
               heading={

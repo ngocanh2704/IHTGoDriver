@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import ActionButton from "react-native-action-button";
 import { Icon } from "../atoms";
-import { Linking } from "react-native";
+import { Linking, Dimensions, Button } from "react-native";
 import { connect } from "react-redux";
 import axios from "../../utilities/axios";
 import { startShipping, finishShipping } from "../../actions/shipping";
@@ -10,12 +10,15 @@ import { StyleSheet, View, Text, Platform } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage";
 import Axios from "axios";
 
+
+
+
 class Fab extends PureComponent {
   constructor() {
     super();
     this.state = {
       image: null,
-      images: null
+      images: null,
     };
   }
 
@@ -23,20 +26,17 @@ class Fab extends PureComponent {
     var token = await AsyncStorage.getItem("@token")
     ImagePicker.openCamera({
       cropping: cropping,
-      width: 500,
-      height: 500,
       includeExif: true,
       mediaType,
       includeBase64: true,
       compressImageQuality: Platform.OS === 'android' ? 0.5 : 0.3
     }).then(image => {
       this.setState({
-        image: `data:${image.mime};base64,`+ image.data,
+        image: `data:${image.mime};base64,` + image.data,
         images: null
       });
       var formData = new FormData();
       var file = this.state.image
-      console.log(file)
       formData.append('id', this.props.id)
       formData.append('image', file)
       formData.append('token', token)
@@ -51,17 +51,17 @@ class Fab extends PureComponent {
         }
       }).then(res => {
         this.cleanupImages()
-        this._finishShipping()
+       this._finishShipping()
       })
         .catch(err => console.log(err))
-    }).catch(e => alert(e));
+    }).catch(e => console.log(e));
   }
 
   cleanupImages() {
     ImagePicker.clean().then(() => {
       console.log('removed tmp images from tmp directory');
     }).catch(e => {
-      alert(e);
+      console.log(e);
     });
   }
 
@@ -84,39 +84,39 @@ class Fab extends PureComponent {
     const { current_status, sender_number, receive_number } = this.props;
 
     return (
-      <ActionButton buttonColor="#b71c1c">
-        <ActionButton.Item
-          title="Gọi cho người gửi"
-          onPress={() => Linking.openURL(`tel:${sender_number}`)}
-        >
-          <Icon name="md-call" />
-        </ActionButton.Item>
-        <ActionButton.Item
-          title="Gọi cho người nhận"
-          onPress={() => Linking.openURL(`tel:${receive_number}`)}
-        >
-          <Icon name="md-call" />
-        </ActionButton.Item>
-        {current_status == 2 && (
+        <ActionButton buttonColor="#b71c1c">
           <ActionButton.Item
-            title="Bắt đầu giao hàng"
-            onPress={this._startShipping}
+            title="Gọi cho người gửi"
+            onPress={() => Linking.openURL(`tel:${sender_number}`)}
           >
-            <Icon name="md-bicycle" />
+            <Icon name="md-call" />
           </ActionButton.Item>
-        )}
-        {current_status == 3 && (
           <ActionButton.Item
-            title="Hoàn thành đơn hàng"
-            onPress={() => {
-              // this._finishShipping(),
-              this.pickSingleWithCamera(false)
-            }}
+            title="Gọi cho người nhận"
+            onPress={() => Linking.openURL(`tel:${receive_number}`)}
           >
-            <Icon name="md-bicycle" />
+            <Icon name="md-call" />
           </ActionButton.Item>
-        )}
-      </ActionButton>
+          {current_status == 2 && (
+            <ActionButton.Item
+              title="Bắt đầu giao hàng"
+              onPress={this._startShipping}
+            >
+              <Icon name="md-bicycle" />
+            </ActionButton.Item>
+          )}
+          {current_status == 3 && (
+            <ActionButton.Item
+              title="Hoàn thành đơn hàng"
+              onPress={() => {
+                // this._finishShipping(),
+                this.pickSingleWithCamera(false)
+              }}
+            >
+              <Icon name="md-bicycle" />
+            </ActionButton.Item>
+          )}
+        </ActionButton>
     );
   }
 }

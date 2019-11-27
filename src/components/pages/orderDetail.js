@@ -1,17 +1,19 @@
 import React, { PureComponent } from "react";
-import { StyleSheet } from "react-native";
-import { Container, Spinner } from "native-base";
+import { StyleSheet, View, Text, Button, Dimensions, Platform  } from "react-native";
+import { Container, Spinner, Input } from "native-base";
 import { ItemDetail } from "../templates";
 import { MenuHeader as Header, Fab } from "../organisms";
 import SwipeGesture from "../../utilities/swipeHandler";
 import { connect } from "react-redux";
-import toast from "../../utilities/toast";
+
 
 class DetailComponent extends PureComponent {
   state = {
     id: null,
-    isLoading: true
+    isLoading: true,
+    isModalVisible: false,
   };
+
   componentDidMount() {
     this.setState(
       {
@@ -96,16 +98,16 @@ class DetailComponent extends PureComponent {
         {this.state.isLoading ? (
           <Spinner color="red" />
         ) : (
-          <>
-            <SwipeGesture
-              gestureStyle={styles.swipesGestureContainer}
-              onSwipePerformed={this.onSwipePerformed}
-            >
-              <ItemDetail id={this.state.id} />
-            </SwipeGesture>
-            {this.props.block === false && <Fab />}
-          </>
-        )}
+            <>
+              <SwipeGesture
+                gestureStyle={styles.swipesGestureContainer}
+                onSwipePerformed={this.onSwipePerformed}
+              >
+                <ItemDetail id={this.state.id} />
+              </SwipeGesture>
+              {this.props.block === false && <Fab />}
+            </>
+          )}
       </Container>
     );
   }
